@@ -11,7 +11,7 @@ window.Popper = require('popper.js').default;
 try {
     window.$ = window.jQuery = require('jquery');
 
-    require('bootstrap');
+    require('cinema/public/js/bootstrap');
 } catch (e) {}
 
 /**

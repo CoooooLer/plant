@@ -12,5 +12,16 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('home');
+});
+
+Route::get('/film',function (){
+    return view('film');
+});
+Route::get('/cinema',function(){
+    return view('cinema');
+});
+
+Route::get('/filmInfo',function (){
+    return view('filmInfo');
 });
