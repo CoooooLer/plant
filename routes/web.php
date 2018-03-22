@@ -11,17 +11,17 @@
 |
 */
 
-Route::get('/', function () {
-    return view('home');
-});
+//Route::get('/', function () {
+//    return view('home');
+//})->name('home');
 
 Route::get('/film',function (){
-    return view('film');
-});
+    return view('user.film');
+})->name('film');
 Route::get('/cinema',function(){
-    return view('cinema');
-});
+    return view('user.cinema');
+})->name('cinema');
 
 Route::get('/filmInfo',function (){
-    return view('filmInfo');
-});
+    return view('user.filmInfo');
+})->name('filmInfo');

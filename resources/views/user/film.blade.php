@@ -1,4 +1,4 @@
-@extends('basic')
+@extends('layout.basic')
 
 @section('title','电影')
 

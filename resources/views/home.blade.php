@@ -1,4 +1,4 @@
-@extends('basic')
+@extends('layout.basic')
 
 @section('title','主页')
 
@@ -158,5 +158,20 @@
 @section('footer')
     @parent
     <script src="js/banner.js"></script>
+    <script>
+        $.ajaxSetup({headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')}});
+        $.ajax({
+           url:'https://movie.douban.com/j/search_subjects?type=tv&tag=%E7%83%AD%E9%97%A8&page_limit=50&page_start=0',
+           type:'get',
+           dataType:'jsonp',
+            jsonp:'callback',
+           success:function(data) {
+               console.log(data);
+           },
+           error:function () {
+               alert(0);
+           },
+        });
+    </script>
 
 @endsection

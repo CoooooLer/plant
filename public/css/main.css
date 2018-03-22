@@ -17,6 +17,19 @@ body{
 
 }
 /*basic start*/
+@media screen and  (max-width: 1000px) {
+    .header{
+       display: flex;
+        justify-content: flex-start;
+    }
+    .header-content{
+        /*width: 800px !important;*/
+        /*flex-direction: column !important;*/
+        /*justify-content: inherit !important;*/
+        /*align-items: inherit !important;*/
+        /*margin-bottom: 100px !important;*/
+    }
+}
 .header{
     position: fixed;
     top: 0;
@@ -32,9 +45,7 @@ body{
     height: 80px;
     display: flex;
     justify-content: space-between;
-    /*justify-content: space-around;*/
     align-items: center;
-    /*border:1px solid red;*/
 }
 .header-nav{
     position: relative;
