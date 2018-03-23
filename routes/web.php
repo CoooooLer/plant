@@ -11,9 +11,7 @@
 |
 */
 
-//Route::get('/', function () {
-//    return view('home');
-//})->name('home');
+Route::get('/', 'HomeController@home')->name('home');
 
 Route::get('/film',function (){
     return view('user.film');

@@ -71,51 +71,19 @@
                 </div>
                 <div class="hot-content">
                     <div class="hot-movie-list">
-                        <div class="hot-movie-unit">
-                            <div class="hot-img-box">
-                                <a href="" target="_blank"><img src="http://p1.meituan.net/movie/65ee71e7b58be81f612f2d28907d5ef01223359.jpg"></a>
-                                <div class="hot-movie-title">
-                                    黑豹
+                        @foreach($movies as $movie1)
+                            @foreach($movie1 as $movie2)
+                                <div class="hot-movie-unit">
+                                    <div class="hot-img-box">
+                                        <a href="" target="_blank"><img src="{{ $movie2['cover'] }}"></a>
+                                        <div class="hot-movie-title">
+                                            {{ $movie2['title'] }}
+                                        </div>
+                                    </div>
+                                    <a href="" class="hot-ticket">选座购票</a>
                                 </div>
-                            </div>
-                            <a href="" class="hot-ticket">购票</a>
-                        </div>
-                        <div class="hot-movie-unit">
-                            <div class="hot-img-box">
-                                <a href="" target="_blank"><img src="http://p1.meituan.net/movie/65ee71e7b58be81f612f2d28907d5ef01223359.jpg"></a>
-                                <div class="hot-movie-title">
-                                    黑豹
-                                </div>
-                            </div>
-                            <a href="" class="hot-ticket">购票</a>
-                        </div>
-                        <div class="hot-movie-unit">
-                            <div class="hot-img-box">
-                                <a href="" target="_blank"><img src="http://p1.meituan.net/movie/65ee71e7b58be81f612f2d28907d5ef01223359.jpg"></a>
-                                <div class="hot-movie-title">
-                                    黑豹
-                                </div>
-                            </div>
-                            <a href="" class="hot-ticket">购票</a>
-                        </div>
-                        <div class="hot-movie-unit">
-                            <div class="hot-img-box">
-                                <a href="" target="_blank"><img src="http://p1.meituan.net/movie/65ee71e7b58be81f612f2d28907d5ef01223359.jpg"></a>
-                                <div class="hot-movie-title">
-                                    黑豹
-                                </div>
-                            </div>
-                            <a href="" class="hot-ticket">购票</a>
-                        </div>
-                        <div class="hot-movie-unit">
-                            <div class="hot-img-box">
-                                <a href="" target="_blank"><img src="http://p1.meituan.net/movie/65ee71e7b58be81f612f2d28907d5ef01223359.jpg"></a>
-                                <div class="hot-movie-title">
-                                    黑豹
-                                </div>
-                            </div>
-                            <a href="" class="hot-ticket">购票</a>
-                        </div>
+                            @endforeach
+                        @endforeach
                     </div>
                 </div>
             </div>
@@ -157,21 +125,29 @@
 
 @section('footer')
     @parent
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script src="js/banner.js"></script>
     <script>
         $.ajaxSetup({headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')}});
-        $.ajax({
-           url:'https://movie.douban.com/j/search_subjects?type=tv&tag=%E7%83%AD%E9%97%A8&page_limit=50&page_start=0',
-           type:'get',
-           dataType:'jsonp',
-            jsonp:'callback',
-           success:function(data) {
-               console.log(data);
-           },
-           error:function () {
-               alert(0);
-           },
-        });
+//        $.ajax({
+//           url:'https://movie.douban.com/j/search_subjects?type=tv&tag=%E7%83%AD%E9%97%A8&page_limit=50&page_start=0',
+//           type:'get',
+//           dataType:'jsonp',
+//            jsonp:'callback',
+//           success:function(data) {
+//               console.log(data);
+//           },
+//           error:function () {
+//               alert(0);
+//           },
+//        });
+//        axios.get('https://movie.douban.com/j/search_subjects?type=tv&tag=%E7%83%AD%E9%97%A8&page_limit=50&page_start=0')
+//            .then(function (response) {
+//                console.log(response);
+//            })
+//            .catch(function (error) {
+//                console.log(error);
+//            });
     </script>
 
 @endsection
