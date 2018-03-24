@@ -12,13 +12,18 @@
 */
 
 Route::get('/', 'HomeController@home')->name('home');
+Route::get('/movieInfo','HomeController@movieInfo');
+Route::get('/cinemas',function (){
+    return view('user.cinemas');
+})->name('cinemas');
+Route::get('/cinema','HomeController@cinema')->name('cinema');
 
-Route::get('/film',function (){
-    return view('user.film');
-})->name('film');
-Route::get('/cinema',function(){
-    return view('user.cinema');
-})->name('cinema');
+Route::get('/movie',function (){
+    return view('user.movie');
+})->name('movie');
+//Route::get('/cinema',function(){
+//    return view('user.cinema');
+//})->name('cinema');
 
 Route::get('/filmInfo',function (){
     return view('user.filmInfo');

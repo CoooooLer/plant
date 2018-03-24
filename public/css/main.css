@@ -400,13 +400,30 @@ body{
     flex-wrap: wrap;
 }
 .hot-movie-unit{
-    border: 1px solid #efefef;
     margin-top: 20px;
     margin-right: 20px;
 }
 .hot-img-box{
     position: relative;
 
+}
+.movie-info-box{
+    text-align: center;
+    padding: 5px;
+    text-decoration: none;
+}
+.movie-info-box a:hover{
+    text-decoration: none;
+    color: #eb5524;
+}
+.movie-info-box .movie-info{
+    color: #333;
+    background: none;
+    vertical-align: top;
+    letter-spacing: normal;
+    word-spacing: normal;
+    height: 24px;
+    line-height: 24px;
 }
 .hot-movie-unit img{
     background-color: #fcfcfc;
@@ -429,8 +446,10 @@ body{
     display: flex;
     justify-content: center;
     width: 100%;
-    padding: 10px;
+    padding: 5px;
     color: #eb5524;
+    border: 1px solid #efefef;
+
 }
 .hot-ticket:hover{
     background-color:#eb5524 ;
@@ -641,6 +660,7 @@ body{
     margin-left: 50px;
     color: #ffffff;
 }
+
 .filmInfo-ticket{
     margin-top: 40px;
     width: 250px;
@@ -669,14 +689,59 @@ body{
 .filmInfo-content-introduce{
     padding: 80px 0 0 0 ;
     border-bottom: 2px solid #eee;
+    z-index:-100;
 }
 .filmInfo-content-introduce span{
-    padding-bottom: 5px;
+    padding-bottom: 4px;
     border-bottom: 2px solid #eb5524;
 }
 .filmInfo-content{
     margin-top: 50px;
 }
+.filmInfo-role-title{
+    padding: 50px 0 0 0 ;
+    border-bottom: 2px solid #eee;
+    z-index:-100;
+}
+.filmInfo-role-title span{
+    padding-bottom: 4px;
+    border-bottom: 2px solid #eb5524;
+}
+.filmInfo-role-box{
+    margin: 50px 0;
+    display: flex;
+    justify-content: flex-start;
+}
+.director-box{
+    display: flex;
+    flex-direction: column;
+}
+.director-box{
+    display: flex;
+    flex-direction: column;
+    margin: 10px;
+}
+.role-box{
+    display: flex;
+    flex-direction: column;
+    margin: 10px;
+}
+.role-img{
+    width: 128px;
+    height: 170px;
+}
+.role-img img{
+    width: 128px;
+    height: 170px;
+    display: block;
+    /*background-color: red;*/
+}
+.role-name{
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
 
 
 

@@ -18,8 +18,8 @@
                 <div class="logo"><img src="img/logo.png"></div>
                 <div class="header-nav">
                     <a href="{{ Route('home') }}" class="nav-unit header-nav-active primary">首页</a>
-                    <a href="{{ Route('film') }}" class="nav-unit">电影</a>
-                    <a href="{{ Route('cinema') }}" class="nav-unit">影院</a>
+                    <a href="{{ Route('movie') }}" class="nav-unit">电影</a>
+                    <a href="{{ Route('cinemas') }}" class="nav-unit">影院</a>
                     <a class="nav-unit">榜单</a>
                     <a class="nav-unit">热点</a>
                     <div class="nav-slider"></div>
@@ -70,6 +70,7 @@
         <script src="js/bootstrap.js"></script>
         <script>
             $(document).ready(function () {
+                //顶部导航栏的切换
                 $.each($('.nav-unit') , function (k,v) {
                     $(v).on('mouseover',function () {
                         $('.nav-slider').css({'transition':'all ease 0.5s','left':v.offsetLeft + 'px'});
@@ -103,6 +104,9 @@
                         console.log(window.location.href);
                         break;
                 }
+
+                //搜索
+
             })
 
         </script>

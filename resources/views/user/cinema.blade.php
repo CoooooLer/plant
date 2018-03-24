@@ -12,14 +12,18 @@
         <div class="wrapper">
             <div class="filmInfo-box">
                 <div class="filmInfo-img">
-                    <img src="http://p1.meituan.net/movie/65ee71e7b58be81f612f2d28907d5ef01223359.jpg" alt="">
+                    <img src=" {{ $results['images']['small'] }} " alt="">
                 </div>
                 <div class="filmInfo-info">
-                    <h3>黑豹</h3>
-                    <p>剧情，动作，科幻</p>
-                    <p>美国/135分钟</p>
-                    <p>2018-03-09大陆上映</p>
-                    <a href="href" class="filmInfo-ticket">查看更多电影信息</a>
+                    <h3>{{ $results['title'] }}</h3>
+                    <p>
+                        @foreach($results['genres'] as $key=>$value)
+                            <span>{{ $value }}</span>
+                        @endforeach
+                    </p>
+                    <p>{{ $results['countries'][0] }}</p>
+                    <p>{{ $results['year'] }}大陆上映</p>
+                    <a href="movieInfo?id={{ $results['id'] }}" class="filmInfo-ticket">电影详情</a>
                 </div>
             </div>
         </div>
