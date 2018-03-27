@@ -66,7 +66,7 @@
             <p>@2018 时光电影 </p>
         </div>
         <script src="js/jquery.min.js"></script>
-        <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+        {{--<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>--}}
         <script src="js/bootstrap.js"></script>
         <script>
             $(document).ready(function () {

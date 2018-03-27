@@ -13,10 +13,10 @@
 
 Route::get('/', 'HomeController@home')->name('home');
 Route::get('/movieInfo','HomeController@movieInfo');
-Route::get('/cinemas',function (){
-    return view('user.cinemas');
-})->name('cinemas');
+Route::get('/cinemas','HomeController@cinemas')->name('cinemas');
 Route::get('/cinema','HomeController@cinema')->name('cinema');
+Route::get('/showScreen','HomeController@showScreen');
+
 
 Route::get('/movie',function (){
     return view('user.movie');
