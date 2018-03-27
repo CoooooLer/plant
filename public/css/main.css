@@ -741,7 +741,41 @@ body{
     overflow: hidden;
     white-space: nowrap;
 }
+/*movieInfo页面 end*/
 
-
-
+/*showScreen页面 start*/
+.movie-info-show{
+    margin-top: 20px;
+    border-bottom: 1px solid #e5e5e5;
+}
+.movie-title-show{
+    display: flex;
+    justify-content: flex-start;
+}
+.movie-title-show .title{
+    display: inline-block;
+    margin: 0 20px 20px 0;
+    font-size: 26px;
+    font-weight: 400;
+    color: #333;
+}
+.movie-title-show span{
+    display: inline-block;
+    font-size: 24px;
+    color: #faaf00;
+}
+.more-info-show div{
+    display: inline-block;
+    font-size: 14px;
+    color: #151515;
+    margin-bottom: 20px;
+    margin-right: 40px;
+}
+.more-info-show .key{
+    color: #999;
+}
+.more-info-show .value{
+    font-size: 14px;
+    color: #151515;
+}
 

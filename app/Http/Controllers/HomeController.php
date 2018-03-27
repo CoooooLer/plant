@@ -64,31 +64,35 @@ class HomeController extends Controller
         $results = $this->getApi($url);
 //        dd($results);
         //获取影院信息
-//        $url = 'http://m.maoyan.com/cinemas.json';
-//        $cinemas = $this->getApi($url);
-//        return view('user.cinema', ['results' => $results], ['cinemas' => $cinemas]);
-        return view('user.cinema', ['results' => $results]);
+        $url = 'http://m.maoyan.com/cinemas.json';
+        $cinemas = $this->getApi($url);
+        return view('user.cinema', ['results' => $results], ['cinemas' => $cinemas]);
+//        return view('user.cinema', ['results' => $results]);
     }
 
     public function showScreen(Request $request)
     {
-        $movieId = $request->movieId;
-        $cinemaId = $request->cinemaId;
-        $price = $request->price;
+        //根据影片ID 影院ID  获取影院放映室信息
+        $movieId = $_GET['movieId'];
+        $cinemaId = $_GET['cinemaId'];
+        $price = $_GET['price'];
 //        dd($movieId,$cinemaId,$price);
-//        $url = 'http://m.maoyan.com/showtime/wrap.json?cinemaid='.$cinemaId.'&movieid='.$movieId;
-//        $cinema = $this->getApi($url);
-//        dd($cinema);
-        return view('user.show');
+        $url = 'http://m.maoyan.com/showtime/wrap.json?cinemaid='.$cinemaId.'&movieid='.$movieId;
+        $cinema = $this->getApi($url);
+        $url ='http://api.douban.com/v2/movie/subject/' . $movieId;
+        $movie = $this->getApi($url);
+//        dd($movie);
+        return view('user.showScreen',['price' => $price],['cinema' => $cinema]);
     }
 
 //    public function show()
 //    {
 //        $movieId = $_GET['movieId'];
 //        dd($movieId);
+//        $price = 1;
 //        $url = 'http://m.maoyan.com/cinemas.json';
 //        $cinema = $this->getApi($url);
-//        return $cinema;
+//        return view('user.show',['price' => $price]);
 //    }
 
 
