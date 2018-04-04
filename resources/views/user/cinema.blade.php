@@ -50,7 +50,7 @@
                             <input type="hidden" value="{{ $cinema1['id'] }}" name="cinemaId">
                             <input type="hidden" value="{{ $cinema1['sellPrice'] }}" name="price">
                             {{--<a href="showScreen?movieId=$results['id']&cinemaId=$cinema1['id']&price=$cinema1['sellPrice]" data-cinemaId="{{ $cinema1['id'] }}" class="seat">选座购票</a>--}}
-                            <input type="submit" class="seat btn btn-danger" value="选座购票">
+                            <input type="submit" class="seat btn btn-danger" value="选座购票" style="border-radius: 100px">
                         </div>
                     </div>
                     {{--@endforeach--}}

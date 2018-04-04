@@ -16,6 +16,7 @@ Route::get('/movieInfo','HomeController@movieInfo');
 Route::get('/cinemas','HomeController@cinemas')->name('cinemas');
 Route::get('/cinema','HomeController@cinema')->name('cinema');
 Route::get('/showScreen','HomeController@showScreen')->name('showScreen');
+Route::view('/selectSeat','user.selectSeat')->name('selectSeat');
 
 
 Route::get('/movie',function (){
