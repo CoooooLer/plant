@@ -1,52 +1,71 @@
 @extends('layout.basic')
 
-@section('title', '登录')
+@section('title','注册')
 
-
+@section('header')
+   @parent
+@endsection
 
 @section('content')
     <div class="content">
         <div class="container">
             <div class="login">
-                <form action="" method="POST">
+                <form action="register" method="POST">
                     {{ csrf_field() }}
-                    <h3 class="system">用户登录</h3>
+                    <h3 class="system">用户注册</h3>
                     <div class="form-group">
                         <div class="input-group">
                             <div class="input-group-addon">
                                 <span class="glyphicon glyphicon-user"></span>
                             </div>
-                            <input class="form-control" placeholder="用户名" type="text" name="username">
+                            <input class="form-control username all" placeholder="用户名 只能用英文字和汉字" type="text" name="username">
                         </div>
+                        <p class="errusername errall"></p>
                     </div>
                     <div class="form-group">
                         <div class="input-group">
                             <div class="input-group-addon">
                                 <span class="glyphicon glyphicon-lock"></span>
                             </div>
-                            <input class="form-control" placeholder="密码" type="password" name="password">
+                            <input class="form-control password all" placeholder="密码" type="password" name="password">
                         </div>
+                        <p class="errpassword errall"></p>
+                    </div>
+                    <div class="form-group">
+                        <div class="input-group">
+                            <div class="input-group-addon">
+                                <span class="glyphicon glyphicon-lock"></span>
+                            </div>
+                            <input class="form-control pwds all" placeholder="确认密码" type="password" name="password_confirmation">
+                        </div>
+                        <p class="errpwds errall"></p>
+                    </div>
+                    <div class="form-group">
+                        <div class="input-group">
+                            <div class="input-group-addon">
+                                <span class="glyphicon glyphicon-envelope"></span>
+                            </div>
+                            <input class="form-control userePhone all" placeholder="用户电话" type="text" name="phone">
+                        </div>
+                        <p class="erruseremail errall"></p>
                     </div>
                     <div class="form-group volidate">
                         <div class="input-group col-xs-7 col-sm-7 col-md-7">
                             <div class="input-group-addon">
                                 <span class="glyphicon glyphicon-check"></span>
                             </div>
-                            <input class="form-control volidate-input validlogin " placeholder="请输入验证码" type="text" name="verifyCode">
+                            <input class="form-control volidate-input validate all" placeholder="请输入验证码" type="text" name="verifyCode">
                             <input type="hidden" value="" class="vericodes" name="verifyCode_confirmation">
+
                         </div>
-                        <canvas id="canvas" class="canvas" width="140" height="50"></canvas>
-                        <p class="errlogin errall"></p>
-                    </div>
-                    <div class="checkbox">
-                        <label>
-                            <input type="checkbox" name="remember" value="1">
-                            记住我
-                        </label>
-                        <a class="forget-pwd" href="">忘记密码?</a>
+                        <canvas id="canvas-r" class="canvas" width="140" height="50"></canvas>
+                        <p class="errvalidate errall"></p>
                     </div>
                     <div class="form-group">
-                        <button type="button" class="form-control btn">登录</button>
+                        <button type="button" class="form-control btn btn-r">注册</button>
+                    </div>
+                    <div class="form-group reg">
+                        已有账号?<a href="log" title="立即注册">立即登录</a>
                     </div>
                     <div class="msg-box">
 
@@ -55,10 +74,6 @@
                     {{--@include('layout.message')--}}
 
                 </form>
-
-
-
-
             </div>
         </div>
     </div>
@@ -69,10 +84,10 @@
     <script src="js/canvas.js"></script>
     <script>
         $(document).ready(function () {
-            $('.btn').on('click',function () {
+            $('.btn-r').on('click',function () {
                 $.ajaxSetup({headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')}});
                 $.ajax({
-                    url:'login',
+                    url:'register',
                     type:'post',
                     data:$('form').serialize(),
                     success:function (data) {
@@ -89,13 +104,13 @@
                             if(k == 'success')
                             {
                                 setTimeout(function () {
-                                    window.location.href='{{ Route('home') }}';
+                                    window.location.href="{{ url('log') }}";
                                 },2000);
                             }
                         });
                     },
                     error:function () {
-//                        alert('error');
+                        alert('error');
                     }
                 });
             });

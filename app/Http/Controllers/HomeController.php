@@ -13,6 +13,7 @@ use Illuminate\Http\Request;
 
 class HomeController extends Controller
 {
+    /*主要处理影片相关的信息*/
     public function home()
     {
 //        $client = new Client();
@@ -85,15 +86,12 @@ class HomeController extends Controller
         return view('user.showScreen',['price' => $price],['cinema' => $cinema]);
     }
 
-//    public function show()
-//    {
-//        $movieId = $_GET['movieId'];
-//        dd($movieId);
-//        $price = 1;
-//        $url = 'http://m.maoyan.com/cinemas.json';
-//        $cinema = $this->getApi($url);
-//        return view('user.show',['price' => $price]);
-//    }
+
+    public function register()
+    {
+
+    }
+
 
 
 

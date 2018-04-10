@@ -18,6 +18,14 @@ Route::get('/cinema','HomeController@cinema')->name('cinema');
 Route::get('/showScreen','HomeController@showScreen')->name('showScreen');
 Route::view('/selectSeat','user.selectSeat')->name('selectSeat');
 
+Route::view('/reg','user.register');
+Route::view('/log','user.login')->name('log');
+
+Route::post('/register','UserController@register')->name('register');
+Route::post('/login','UserController@login')->name('login');
+Route::any('/logOut','UserController@logOut')->name('logOut');
+
+
 
 Route::get('/movie',function (){
     return view('user.movie');

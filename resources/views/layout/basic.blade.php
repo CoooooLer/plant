@@ -29,15 +29,15 @@
                 </div>
                 <div class="nav-login" role="navigation">
 
-                    {{--@if(Cookie::has('username'))--}}
-                    @if(1)
+                    @if(Cookie::has('username'))
 
                         <ul class="nav-login-lo">
                             <li class="dropdown ">
-                                123
-                                {{--<a href="#" class="" data-toggle="dropdown" role="button"  aria-expanded="true">&nbsp;&nbsp;{{ Cookie::get('username') }}&nbsp;&nbsp;<span class="caret"></span></a>--}}
+                                <a href="#" class="" data-toggle="dropdown" role="button"  aria-expanded="true">&nbsp;&nbsp;{{ Cookie::get('username') }}&nbsp;&nbsp;<span class="caret"></span></a>
                                 <ul class="dropdown-menu">
-                                    admin
+                                    <li><a href=""><span class="glyphicon glyphicon-user"></span>个人中心</a></li>
+                                    <li><a href=""><span class="glyphicon glyphicon-user"></span>个人中心</a></li>
+                                    <li><a href=" {{ Route('logOut') }} "><span class="glyphicon glyphicon-user"></span>退出登录</a></li>
                                     {{--<li><a href="{{ Route('user.show') }}"><span class="glyphicon glyphicon-user"></span>个人中心</a></li>--}}
                                     {{--<li><a href="{{ Route('user.project') }}"><span class="glyphicon glyphicon-list"></span>我的项目</a></li>--}}
                                     {{--<li><a href="{{ Route('dashboard') }}"><span class="glyphicon glyphicon-home"></span>后台管理</a></li>--}}
@@ -47,8 +47,7 @@
                         </ul>
                     @else
                         <ul class="nav-login-lo">
-                            user
-                            {{--<li><a href="{{route('login')}}">登录</a></li>--}}
+                            <li><a href="{{route('log')}}">登录</a></li>
                         </ul>
                     @endif
                 </div>
