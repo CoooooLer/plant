@@ -83,6 +83,7 @@
 //                    $cinemaId = $('.seat').attr('data-cinemaId');
 //                    $price = $('.price').eq(i).attr('data-price');
 ////                    console.log(movieId,cinemaId,price);
+//                    $.ajaxSetup({headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')}});
 //                    $.ajax({
 //                        url: 'showScreen',
 //                        type: 'get',

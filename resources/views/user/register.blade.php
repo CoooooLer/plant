@@ -3,7 +3,7 @@
 @section('title','注册')
 
 @section('header')
-   @parent
+
 @endsection
 
 @section('content')
@@ -64,9 +64,9 @@
                     <div class="form-group">
                         <button type="button" class="form-control btn btn-r">注册</button>
                     </div>
-                    <div class="form-group reg">
-                        已有账号?<a href="log" title="立即注册">立即登录</a>
-                    </div>
+                        <div class="form-group reg">
+                            已有账号?<a href="log" title="立即注册">立即登录</a>
+                        </div>
                     <div class="msg-box">
 
                     </div>
@@ -80,7 +80,7 @@
 @endsection
 
 @section('footer')
-    @parent
+    <script src="js/jquery.min.js"></script>
     <script src="js/canvas.js"></script>
     <script>
         $(document).ready(function () {

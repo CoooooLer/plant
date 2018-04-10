@@ -8,8 +8,12 @@
 
 namespace App\Http\Controllers;
 
+use App\model\Screen;
+use App\model\Seat;
 use GuzzleHttp\Client;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cookie;
+
 
 class HomeController extends Controller
 {
@@ -33,7 +37,6 @@ class HomeController extends Controller
         //影片排行信息
         $url = 'http://api.douban.com/v2/movie/us_box';
         $usa = $this->getApi($url);
-//        dd($usa);
         return view('home', ['movies' => $response], ['usa' => $usa]);
     }
 
@@ -41,9 +44,11 @@ class HomeController extends Controller
     {
         //影片ID  获取影片信息
         $id = $request->id;
+        setcookie('movieId',$id);
+//        cookie('movieId',$id);
+//        Cookie::queue('movieId',$id);
         $url = 'http://api.douban.com/v2/movie/subject/' . $id;
         $results = $this->getApi($url);
-//        dd($results);
         return view('user.movieInfo', ['results' => $results]);
     }
 
@@ -53,44 +58,67 @@ class HomeController extends Controller
         $url = 'http://m.maoyan.com/cinemas.json';
 //        $url = 'http://m.maoyan.com/showtime/wrap.json?cinemaid=7887&movieid=26575103';
         $cinemas = $this->getApi($url);
-//        dd($cinemas);
         return view('user.cinemas', ['cinemas' => $cinemas]);
     }
 
     public function cinema(Request $request)
     {
         //影片ID  获取影片信息
-        $id = $request->id;
+//        dd($request);
+        $id = $_COOKIE['movieId'];
         $url = 'http://api.douban.com/v2/movie/subject/' . $id;
         $results = $this->getApi($url);
-//        dd($results);
         //获取影院信息
         $url = 'http://m.maoyan.com/cinemas.json';
         $cinemas = $this->getApi($url);
         return view('user.cinema', ['results' => $results], ['cinemas' => $cinemas]);
-//        return view('user.cinema', ['results' => $results]);
     }
 
     public function showScreen(Request $request)
     {
         //根据影片ID 影院ID  获取影院放映室信息
-        $movieId = $_GET['movieId'];
+//        $movieId = $_GET['movieId'];
+        $movieId = $_COOKIE['movieId'];
         $cinemaId = $_GET['cinemaId'];
+        setcookie('cinemaId',$cinemaId);
         $price = $_GET['price'];
 //        dd($movieId,$cinemaId,$price);
-        $url = 'http://m.maoyan.com/showtime/wrap.json?cinemaid='.$cinemaId.'&movieid='.$movieId;
+        $url = 'http://m.maoyan.com/showtime/wrap.json?cinemaid='.$cinemaId.'&movieId='.$movieId;
         $cinema = $this->getApi($url);
+
         $url ='http://api.douban.com/v2/movie/subject/' . $movieId;
         $movie = $this->getApi($url);
-//        dd($movie);
-        return view('user.showScreen',['price' => $price],['cinema' => $cinema]);
+        $screens = Screen::all();
+//        dd($cinema);
+
+        return view('user.showScreen',['cinema' => $cinema],['screens' => $screens]);
     }
 
-
-    public function register()
+    public function selectSeat()
     {
+        $sId = $_GET['sId'];
+        $movieId = $_COOKIE['movieId'];
+        $cinemaId = $_COOKIE['cinemaId'];
+//        dd($sId,$movieId,$cinemaId);
+        $screen = Screen::find($sId);
+        $url ='http://api.douban.com/v2/movie/subject/' . $movieId;
+        $movie = $this->getApi($url);
+
+        $url = 'http://m.maoyan.com/cinemas.json';
+        $cinema = $this->getApi($url);
+
+        $seats = Seat::where('sId','=',$sId)->get();
+        $row = Seat::where('sId','=',$sId)
+            ->max('row')
+            ;
+//        dd($row);
+        return view('user.selectSeat',['movie' => $movie],['cinema' => $cinema],['row' => $row]);
 
     }
+
+
+
+
 
 
 

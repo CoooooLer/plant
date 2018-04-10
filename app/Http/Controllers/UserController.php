@@ -157,8 +157,54 @@ class UserController extends Controller
         return redirect()->route('home')->cookie('username','',-1);
     }
 
+    public function editPerson()
+    {
+        $username = $_GET['username'];
+        $user = User::where('username','=',$username)->first();
+        return view('user.editPerson',['user' => $user]);
+    }
 
-
+    public function editPersonInfo()
+    {
+        $password = $_POST['password'];
+        $r_password = $_POST['password_confirmation'];
+        $phone = $_POST['phone'];
+        $id = $_POST['id'];
+        if($password & $r_password & $phone)
+        {
+            if(!preg_match($this->validate['password'],$password) & !preg_match($this->validate['password'],$r_password))
+            {
+                return response()->json(['warning' => '密码格式不正确']);
+            }
+            if(!preg_match($this->validate['phone'],$phone))
+            {
+                return response()->json(['warning' => '电话号码格式不正确']);
+            }
+            if($password === $r_password)
+            {
+                $user = User::find($id);
+                $user->password = bcrypt($password);
+                $user->phone = $phone;
+                $bool = $user->save();
+                if($bool)
+                {
+                    return response()->json(['success' => '保存成功']);
+                }
+                else
+                {
+                    return response()->json(['warning' => '保存失败']);
+                }
+            }
+            else
+            {
+                return response()->json(['warning' => '两次密码不一致']);
+            }
+        }
+        else
+        {
+            return response()->json(['warning' => '密码、电话不能为空']);
+        }
+    }
 
 
 }

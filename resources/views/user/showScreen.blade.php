@@ -26,9 +26,9 @@
                             </p>
                             <p>电话：{{ $cinema['data']['cinemaDetailModel']['tel'][0] }}</p>
                             <h4>影院服务————————————————————</h4>
-                            @foreach($cinema['data']['cinemaDetailModel']['featureTags'] as $cinema)
-                            <p><div style="">{{ $cinema['desc'] }}</div></p>
-                            @endforeach
+                            {{--@foreach($cinema['data']['cinemaDetailModel']['featureTags'] as $cinema)--}}
+                            {{--<p><div style="">{{ $cinema['desc'] }}</div></p>--}}
+                            {{--@endforeach--}}
                             {{--<a href="" data-movieId="" class="filmInfo-ticket movieId">电影详情</a>--}}
                         </div>
                     {{--@endforeach--}}
@@ -61,34 +61,36 @@
                 <div>售价(元)</div>
                 <div>选座购票</div>
             </div>
-            <div class="screen-content screen-bg">
-                <div>11</div>
-                <div>22</div>
-                <div>33</div>
-                <div>44</div>
-                <div><a href="" class="ticket">立即购票</a></div>
-            </div>
-            <div class="screen-content screen-bg">
-                <div>11</div>
-                <div>22</div>
-                <div>33</div>
-                <div>44</div>
-                <div>55</div>
-            </div>
-            <div class="screen-content screen-bg">
-                <div>11</div>
-                <div>22</div>
-                <div>33</div>
-                <div>44</div>
-                <div>55</div>
-            </div>
-            <div class="screen-content screen-bg">
-                <div>11</div>
-                <div>22</div>
-                <div>33</div>
-                <div>44</div>
-                <div>55</div>
-            </div>
+            @foreach($screens as $screen)
+                <div class="screen-content screen-bg">
+                    <div>{{ $screen->s_start }}到{{ $screen->s_end }}</div>
+                    <div>国语</div>
+                    <div>{{ $screen->s_name }}</div>
+                    <div>{{ $screen->price }}</div>
+                    <div><a href="selectSeat?sId={{ $screen->sId }}" class="ticket">立即购票</a></div>
+                </div>
+            @endforeach
+            {{--<div class="screen-content screen-bg">--}}
+                {{--<div>11</div>--}}
+                {{--<div>22</div>--}}
+                {{--<div>33</div>--}}
+                {{--<div>44</div>--}}
+                {{--<div>55</div>--}}
+            {{--</div>--}}
+            {{--<div class="screen-content screen-bg">--}}
+                {{--<div>11</div>--}}
+                {{--<div>22</div>--}}
+                {{--<div>33</div>--}}
+                {{--<div>44</div>--}}
+                {{--<div>55</div>--}}
+            {{--</div>--}}
+            {{--<div class="screen-content screen-bg">--}}
+                {{--<div>11</div>--}}
+                {{--<div>22</div>--}}
+                {{--<div>33</div>--}}
+                {{--<div>44</div>--}}
+                {{--<div>55</div>--}}
+            {{--</div>--}}
         </div>
     </div>
 @endsection

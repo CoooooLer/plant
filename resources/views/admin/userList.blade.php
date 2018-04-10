@@ -7,12 +7,11 @@
     }
 </style>
 
-@extends('layouts.basic')
+@extends('layout.basic')
 
 @section('title','用户管理')
 
 @section('header')
-    @include('layouts.header')
 @endsection
 
 @section('content')
@@ -20,14 +19,11 @@
     <div class="content">
         <div class="container manual-body">
             <div class="row">
-
-                @include('layouts.left')
-
                 <div class="page-right">
                     <div class="m-box">
                         <div class="box-head">
                             <strong class="box-title">用户管理</strong>
-                            <a href="createUser" type="button" class="btn btn-success btn-sm pull-right">
+                            <a href="create" type="button" class="btn btn-success btn-sm pull-right">
                                 <span class="glyphicon glyphicon-plus"></span>
                                 添加用户
                             </a>
@@ -40,28 +36,28 @@
                                 <tr>
                                     <th width="80">ID</th>
                                     <th width="80">用户名</th>
-                                    <th>邮箱</th>
+                                    <th>电话</th>
                                     <th>创建时间</th>
                                     <th>更新时间</th>
                                     <th>操作</th>
                                 </tr>
                                 </thead>
                                 <tbody>
-                                @forelse($datas as $data)
-                                    <form action="deleteUser={{ $data->uid }}" method="post" >
+                                @forelse($users as $user)
+                                    <form action="deleteUser={{ $user->uid }}" method="post">
                                         {{ csrf_field() }}
                                         <tr>
-                                            <td>{{ $data->uid }}</td>
-                                            <td>{{ $data->username }}</td>
-                                            <td>{{ $data->email }}</td>
-                                            <td> {{ $data->created_at }} </td>
-                                            <td> {{ $data->updated_at }} </td>
+                                            <td>{{ $user->uid }}</td>
+                                            <td>{{ $user->username }}</td>
+                                            <td>{{ $user->phone }}</td>
+                                            <td> {{ $user->created_at }} </td>
+                                            <td> {{ $user->updated_at }} </td>
                                             {{--<td><span class="label label-danger">禁用</span></td>--}}
                                             <td>
-                                                <a href="userId={{ $data->uid }}" class="btn btn-sm btn-default">编辑</a>
-                                                @if( $data->username != 'admin' )
-                                                    @if( $data->username != Cookie::get('username'))
-                                                        <input type="button" id="{{ $data->uid }}" name="{{ $data->uid }}" class="btn btn-danger btn-sm drop" value="删除" />
+                                                <a href="userEdit?uId={{ $user->uid }}" class="btn btn-sm btn-default">编辑</a>
+                                                @if( $user->username != 'admin' )
+                                                    @if( $user->username != Cookie::get('username'))
+                                                        <input type="button" id="{{ $user->uid }}" name="{{ $user->uid }}" class="btn btn-danger btn-sm drop" value="删除" />
                                                     @endif
                                                 @endif
                                             </td>
@@ -124,7 +120,7 @@
                                  <tr>
                                     <td>${v.uid}</td>
                                     <td>${v.username}</td>
-                                    <td>${v.email}</td>
+                                    <td>${v.phone}</td>
                                     <td>${v.created_at} </td>
                                     <td> ${v.updated_at} </td>
                                             <td>
@@ -141,7 +137,7 @@
                                  <tr>
                                     <td>${v.uid}</td>
                                     <td>${v.username}</td>
-                                    <td>${v.email}</td>
+                                    <td>${v.phone}</td>
                                     <td>${v.created_at} </td>
                                     <td> ${v.updated_at} </td>
                                         <td>
@@ -173,13 +169,13 @@
             $('.drop').on('click',function () {
                 $('#drop').modal('show');//调用模态框
                 var $_this = $(this);
-                var $id = ($('.drop').attr('id'));
-                console.log($id);
+                var $uId = ($('.drop').attr('id'));
+//                console.log($id);
                 $.ajaxSetup({headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')}});
                 $('#btn-drop-confirm').on('click',function () {
                     $.ajax({
                         url:'deleteUser',
-                        data:{'id':$id},
+                        data:{'uId':$uId},
                         type:'post',
                         success:function (data) {
                             $_this.parents('tr').remove();

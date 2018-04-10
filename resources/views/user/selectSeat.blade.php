@@ -42,12 +42,9 @@
                 </div>
                 <div class="seat-block">
                     <div class="row-id-container">
-                        <span class="row-id">1</span>
-                        <span class="row-id">1</span>
-                        <span class="row-id">1</span>
-                        <span class="row-id">1</span>
-                        <span class="row-id">1</span>
-                        <span class="row-id">1</span>
+
+                            <span class="row-id">{{ $row }}</span>
+
                     </div>
                     <div class="seat-container">
                         <div class="screen">银幕中央</div>
@@ -67,13 +64,18 @@
             <div class="side">
                 <div class="movie-info">
                     <div class="poster">
-                        <img src="http://p0.meituan.net/movie/a547dd7f6851d7ced67ec1b6c8b7f3b2447754.jpg@115w_158h_1e_1c">
+                        {{--<img src="http://p0.meituan.net/movie/a547dd7f6851d7ced67ec1b6c8b7f3b2447754.jpg@115w_158h_1e_1c">--}}
+                        <img src="{{ $movie['images']['small'] }}">
                     </div>
                     <div class="content">
-                        <p class="name text-ellipsis">头号玩家</p>
+                        {{--<p class="name text-ellipsis">头号玩家</p>--}}
+                        <p class="name text-ellipsis">{{ $movie['title'] }}</p>
                         <div class="info-item">
                             <span>类型 :</span>
-                            <span class="value">动作,冒险,科幻</span>
+                            {{--<span class="value">动作,冒险,科幻</span>--}}
+                            @foreach($movie['genres'] as $genres)
+                                <span class="value">{{ $genres }}</span>
+                            @endforeach
                         </div>
                         <div class="info-item">
                             <span>时长 :</span>
@@ -82,26 +84,28 @@
                     </div>
                 </div>
                 <div class="show-info">
-                    <div class="info-item">
-                        <span>影院 :</span>
-                        <span class="value text-ellipsis">橙天影城(遵义店)</span>
-                    </div>
-                    <div class="info-item">
-                        <span>影厅 :</span>
-                        <span class="value text-ellipsis">3号激光厅</span>
-                    </div>
-                    <div class="info-item">
-                        <span>版本 :</span>
-                        <span class="value text-ellipsis">英语3D</span>
-                    </div>
-                    <div class="info-item">
-                        <span>场次 :</span>
-                        <span class="value text-ellipsis screen" style="color: #ff0000;">今天 4月4 19:05</span>
-                    </div>
-                    <div class="info-item">
-                        <span>票价 :</span>
-                        <span class="value text-ellipsis">￥33/张</span>
-                    </div>
+
+                        <div class="info-item">
+                            <span>影院 :</span>
+                            {{--<span class="value text-ellipsis"> {{ (array_values(array_values($cinema['data'])[0])[0])['nm']  }}</span>--}}
+                        </div>
+                        <div class="info-item">
+                            <span>影厅 :</span>
+                            <span class="value text-ellipsis">3号激光厅</span>
+                        </div>
+                        <div class="info-item">
+                            <span>版本 :</span>
+                            <span class="value text-ellipsis">英语3D</span>
+                        </div>
+                        <div class="info-item">
+                            <span>场次 :</span>
+                            <span class="value text-ellipsis screen" style="color: #ff0000;">今天 4月4 19:05</span>
+                        </div>
+                        <div class="info-item">
+                            <span>票价 :</span>
+                            {{--<span class="value text-ellipsis">￥{{ (array_values(array_values($cinema['data'])[0])[0])['sellPrice']  }}/张</span>--}}
+                        </div>
+
                 </div>
                 <div class="ticket-info">
                     <div class="no-ticket" style="display: block;">
