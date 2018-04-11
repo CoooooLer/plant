@@ -111,8 +111,17 @@ class HomeController extends Controller
         $row = Seat::where('sId','=',$sId)
             ->max('row')
             ;
-//        dd($row);
-        return view('user.selectSeat',['movie' => $movie],['cinema' => $cinema],['row' => $row]);
+
+
+//        dd($seats);
+        return view('user.selectSeat',
+            [
+                'movie' => $movie,
+                'cinema' => $cinema,
+                'seats' => $seats,
+                'row' => $row,
+                'screen' => $screen,
+            ]);
 
     }
 

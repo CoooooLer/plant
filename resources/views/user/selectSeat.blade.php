@@ -3,10 +3,11 @@
 @section('title','选座')
 
 @section('header')
-    @parent
+    {{--@parent--}}
 @endsection
 
 @section('content')
+
     <div class="container" style="margin-top: 100px">
         <div class="line-box-seat">
             <div class="movie-line-box">
@@ -42,20 +43,26 @@
                 </div>
                 <div class="seat-block">
                     <div class="row-id-container">
-
-                            <span class="row-id">{{ $row }}</span>
-
+                        @for($i=1;$i<=$row;$i++)
+                            <span class="row-id">{{ $i }}</span>
+                        @endfor
                     </div>
                     <div class="seat-container">
                         <div class="screen">银幕中央</div>
                         <div class="seats-wrapper">
                             <div class="row">
-                                <span class="seat selectable" data-column-id="1" data-row-id="1" data-no="03010101" data-st="N" data-act="seat-click" data-bid="b_s7eiiijf"></span>
-                                <span class="seat selectable" data-column-id="2" data-row-id="1" data-no="03010102" data-st="N" data-act="seat-click" data-bid="b_s7eiiijf"></span>
-                            </div>
-                            <div class="row">
-                                <span class="seat selectable" data-column-id="1" data-row-id="1" data-no="03010101" data-st="N" data-act="seat-click" data-bid="b_s7eiiijf"></span>
-                                <span class="seat selectable" data-column-id="2" data-row-id="1" data-no="03010102" data-st="N" data-act="seat-click" data-bid="b_s7eiiijf"></span>
+                                @foreach($seats as $seat)
+                                    @if($seat->status === 0)
+                                        <span class="seat white selectable" data-row-id="{{ $seat->row }}" data-column-id="{{ $seat->column }}"  data-no="03010101" data-st="N" data-act="seat-click" data-bid="b_s7eiiijf"></span>
+                                    @elseif($seat->status === 1)
+                                        <span class="seat green selectabled" data-row-id="{{ $seat->row }}" data-column-id="{{ $seat->column }}"></span>
+                                    @elseif($seat->status === -1)
+                                        <span class="seat red selectabled" data-row-id="{{ $seat->row }}" data-column-id="{{ $seat->column }}"  data-no="03010101" data-st="N" data-act="seat-click" data-bid="b_s7eiiijf"></span>
+                                    @else
+                                        <span class="seat" style="background: #ffffff!important;" data-row-id="{{ $seat->row }}" data-column-id="{{ $seat->column }}" data-no="03010101" data-st="N" data-act="seat-click" data-bid="b_s7eiiijf"></span>
+                                    @endif
+                                @endforeach
+                                {{--<span class="seat selectable" data-column-id="2" data-row-id="1" data-no="03010102" data-st="N" data-act="seat-click" data-bid="b_s7eiiijf"></span>--}}
                             </div>
                         </div>
                     </div>
@@ -69,7 +76,7 @@
                     </div>
                     <div class="content">
                         {{--<p class="name text-ellipsis">头号玩家</p>--}}
-                        <p class="name text-ellipsis">{{ $movie['title'] }}</p>
+                        <p class="name text-ellipsis movie-name" data-movie-name="{{ $movie['title'] }}">{{ $movie['title'] }}</p>
                         <div class="info-item">
                             <span>类型 :</span>
                             {{--<span class="value">动作,冒险,科幻</span>--}}
@@ -87,11 +94,12 @@
 
                         <div class="info-item">
                             <span>影院 :</span>
-                            {{--<span class="value text-ellipsis"> {{ (array_values(array_values($cinema['data'])[0])[0])['nm']  }}</span>--}}
+                            <span class="value text-ellipsis cinema-name" data-cinema-name="{{ (array_values(array_values($cinema['data'])[0])[0])['nm']  }}"> {{ (array_values(array_values($cinema['data'])[0])[0])['nm']  }}</span>
                         </div>
                         <div class="info-item">
                             <span>影厅 :</span>
-                            <span class="value text-ellipsis">3号激光厅</span>
+                            <span class="value text-ellipsis screen-name" data-screen-name="{{ $screen->s_name }}">{{ $screen->s_name }}</span>
+                            <span class="value text-ellipsis screen-id" data-screen-id="{{ $screen->sId }}"></span>
                         </div>
                         <div class="info-item">
                             <span>版本 :</span>
@@ -99,11 +107,11 @@
                         </div>
                         <div class="info-item">
                             <span>场次 :</span>
-                            <span class="value text-ellipsis screen" style="color: #ff0000;">今天 4月4 19:05</span>
+                            <span class="value text-ellipsis screen" style="color: #ff0000;">{{ $screen->date }}&nbsp;{{ $screen->s_start }}</span>
                         </div>
                         <div class="info-item">
                             <span>票价 :</span>
-                            {{--<span class="value text-ellipsis">￥{{ (array_values(array_values($cinema['data'])[0])[0])['sellPrice']  }}/张</span>--}}
+                            <span class="value text-ellipsis sellPrice" data-price="{{ (array_values(array_values($cinema['data'])[0])[0])['sellPrice']  }}">￥{{ (array_values(array_values($cinema['data'])[0])[0])['sellPrice']  }}/张</span>
                         </div>
 
                 </div>
@@ -115,24 +123,46 @@
                     <div class="has-ticket" style="display: none;">
                         <span class="text">座位：</span>
                         <div class="ticket-container" data-limit="4">
-                            <span class="ticket" data-row-id="8" data-column-id="1" data-index="8-1">8排1座</span>
+                            {{--<span class="selected">8排1座</span>--}}
                         </div>
                     </div>
 
                     <div class="total-price">
                         <span>总价 :</span>
-                        <span class="price">0</span>
+                        <span class="allPrice"></span><span>元</span>
                     </div>
                 </div>
                 <div class="confirm-order">
-                    <button class="btn btn-success">确认选座</button>
+                    <button class="btn btn-success confirm-ticket">确认选座</button>
                 </div>
             </div>
         </div>
+    </div>
 
-
-
-
+    {{--确认选座的模态框 start--}}
+    <div class="modal fade confirm-ticket-modal" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">请付款</h4>
+                </div>
+                <div class="modal-body">
+                    <p class="ticket-tip" style="text-align: center;font-size: 18px;">One fine body&hellip;</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                    <button type="button" class="btn btn-success confirm-pay" data-dismiss="modal">确定</button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+    {{--确认选座的模态框 end--}}
+    <div class="seat-bg">
+        <div class="seat-load">
+            正在支付，请稍候。
+            <img src="img/load01.gif" alt="">
+        </div>
     </div>
 @endsection
 
@@ -140,7 +170,141 @@
     @parent
     <script>
         $(document).ready(function () {
-            $('.row').foreach()
+            /*选座*/
+            $rowArr = [];
+            $columnArr = [];
+            $('.selectable').map(function (i) {
+                $i = 0;
+//                $sellPrice = $('.sellPrice').attr('data-price');
+                $sellPrice = 23;
+                $allPrice = 0;
+
+                $iArr = [];
+                /*选座的单击事件*/
+                $(this).on('click',function () {
+                    $row = $(this).attr('data-row-id');
+                    $column = $(this).attr('data-column-id');
+                    $(this).toggleClass('green');
+
+
+                    /*判断是否选中  green*/
+                    $sign = ($(this).attr('class'));
+                    $sign = $sign.indexOf('green');
+
+                    $('.no-ticket').css({'display':'none'});
+                    $('.has-ticket').css({'display':'block'});
+
+//                    console.log($iArr[i],i,$sign);
+//                    console.log($iArr[i]!==i);
+                    if($iArr[i] === i && $sign<0)
+                    {
+                        $iArr[i] = -1;
+                        $('.ticket-container span:last').remove();
+                            $allPrice -= parseInt($sellPrice);
+                            $('.allPrice').html($allPrice);
+                    }
+                    else
+                    {
+                        $iArr[i] = i;
+                    }
+
+
+                    if($iArr[i]!==i && $sign>0)
+                    {
+                        $allPrice += parseInt($sellPrice);
+                        $span = $("<span></span>").text($row+'排'+$column+'座');
+                        $('.ticket-container').append($span);
+                        $('.allPrice').html($allPrice);
+
+                    }
+
+                    if($sign>0)
+                    {
+                        if($rowArr.indexOf($row)>0 && $columnArr.indexOf($column)>0)
+                        {
+                            console.log('--');
+//                            $rowArr[$i] = null;
+//                            if($rowArr[$i] == $row && $columnArr[$i] == $column)
+//                            {
+//                                console.log($rowArr[$i] == $row);
+//                                $('.ticket-container span:last').remove();
+//                                $allPrice -= parseInt($sellPrice);
+//                                $('.allPrice').html($allPrice+'元');
+//                            }
+//                            console.log($rowArr.indexOf($row),$columnArr.indexOf($column));
+//                            $('.ticket-container span:last').remove();
+//                            $allPrice -= parseInt($sellPrice);
+//                            $('.allPrice').html($allPrice+'元');
+                        }
+                        else
+                        {
+                            console.log('++');
+                            $i++;
+//                            console.log($i);
+                            $rowArr[$i] = $row;
+                            $columnArr[$i] = $column;
+                            $allPrice += parseInt($sellPrice);
+                            if($i>3)
+                            {
+                                $('.selectable').unbind();
+                                alert('最多购买4张票');
+                            }
+
+                            $span = $("<span></span>").text($row+'排'+$column+'座');
+                            $('.ticket-container').append($span);
+
+                            $('.allPrice').html($allPrice);
+                        }
+
+                    }
+
+                })
+            });
+
+            /*付款*/
+            $('.confirm-ticket').on('click',function () {
+                $movieName = $('.movie-name').attr('data-movie-name');
+                $cinemaName = $('.cinema-name').attr('data-cinema-name');
+                $screenId = $('.screen-id').attr('data-screen-id');
+                $allPrice = $('.allPrice').text();
+
+                   console.log($movieName,$cinemaName,$screenId,$allPrice);
+                   console.log($rowArr,$columnArr);
+
+                $('.ticket-tip').text('确认支付'+$allPrice+'元');
+                $('.confirm-ticket-modal').modal('show')
+
+                $('.confirm-pay').on('click',function () {
+                    $screenWidth = $(window).width();
+                    $screenHeight = $(window).height();
+                    setTimeout(function () {
+                        $('.seat-bg').css({'width':$screenWidth,'height':$screenHeight,'display':'block'});
+                        $('.seat-load').css({'display':'block'});
+                        $.ajaxSetup({headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')}});
+                        $.ajax({
+                            url:'ticket',
+                            type:'post',
+                            data:{
+                                  'movieName':$movieName,
+                                  'cinemaName':$cinemaName,
+                                  'screenId':$screenId,
+                                  'allPrice':$allPrice,
+                                },
+                            success:function (data) {
+
+                            },
+                            error:function () {
+                              alert('error');
+                            },
+                        });
+
+
+                    },1000);
+                });
+            });
+
+
+
         });
     </script>
 @endsection

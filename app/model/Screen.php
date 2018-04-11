@@ -19,7 +19,10 @@ class Screen extends Model
 
     protected $fillable = [
         'sId',
-        's_name'
+        's_name',
+        'price',
+        's_start',
+        's_end',
     ];
 
 
