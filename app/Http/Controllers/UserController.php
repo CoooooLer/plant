@@ -10,7 +10,10 @@ namespace App\Http\Controllers;
 
 
 
+use App\model\Screen;
+use App\model\Seat;
 use App\model\User;
+use App\model\Ticket;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
@@ -204,6 +207,35 @@ class UserController extends Controller
         {
             return response()->json(['warning' => '密码、电话不能为空']);
         }
+    }
+
+    public function personal()
+    {
+        $username = $_COOKIE['username'];
+        $tickets = Ticket::where('username','=',$username)->get();
+//        dd($ticket);
+        return view('user.personal',['tickets' => $tickets]);
+    }
+
+    public function dropTicket(Request $request)
+    {
+        $index = 0;
+        $ticketId = $request->ticketId;
+        $ticket = Ticket::find($ticketId);
+//        dd($ticket);
+        $row = $ticket->row;
+        $column = $ticket->column;
+        $sId = $ticket->sId;
+        $seat = Seat::where('row','=',$row)->where('column','=',$column)->first();
+        $seat->status = $index;
+        $bool = $seat->save();
+
+
+
+
+
+
+        return $ticketId;
     }
 
 

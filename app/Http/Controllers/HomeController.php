@@ -128,6 +128,7 @@ class HomeController extends Controller
     public function ticket(Request $request)
     {
         $ticket = null;
+        $bool = null;
         $movieName = $request->movieName;
         $cinemaName = $request->cinemaName;
         $screenId = $request->screenId;
@@ -135,6 +136,7 @@ class HomeController extends Controller
 //        dd($movieName,$cinemaName,$screenId,$allPrice);
         $screen = Screen::find($screenId);
 //        dd($screen);
+        $sId = $screen->sId;
         $s_name = $screen->s_name;
         $s_start = $screen->s_start;
         $s_end = $screen->s_end;
@@ -152,7 +154,12 @@ class HomeController extends Controller
         $columnArrLength = count($columnArr);
         for ($i=1;$i<$rowArrLength;$i++)
         {
+            $seat = Seat::where('sId','=',$sId)->where('row','=',$rowArr[$i])->where('column','=',$columnArr[$i])->first();
+            $seat->status = -1;
+            $bool = $seat->save();
+
             $ticket = Ticket::create([
+                'sId' => $sId,
                 'username' => $username,
                 'movie_name' => $movieName,
                 'cinema_name' => $cinemaName,
@@ -165,7 +172,7 @@ class HomeController extends Controller
                 'column' => $columnArr[$i],
             ]);
         }
-        if($ticket)
+        if($ticket && $bool)
         {
             return 'success';
         }

@@ -1201,13 +1201,14 @@ a{
 /*admin  管理中心 start*/
 .page-right{
     margin-top: 100px;
+    /*padding: 0 100px;*/
 }
 .box-head{
-    text-align: center;
+    /*text-align: center;*/
 
 }
 .box-body{
-    padding: 0 100px;
+    /*padding: 0 100px;*/
 }
 
 /*admin  管理中心 end*/

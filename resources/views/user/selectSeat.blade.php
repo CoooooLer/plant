@@ -3,7 +3,7 @@
 @section('title','选座')
 
 @section('header')
-    {{--@parent--}}
+    @parent
 @endsection
 
 @section('content')
@@ -309,7 +309,7 @@
                                 },4000);
                             },
                             error:function () {
-                              alert('error');
+//                              alert('error');
                             },
                         });
 

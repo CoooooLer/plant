@@ -12,6 +12,7 @@
 @section('title','用户管理')
 
 @section('header')
+    @parent
 @endsection
 
 @section('content')
