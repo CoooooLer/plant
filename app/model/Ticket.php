@@ -24,8 +24,10 @@ class ticket extends Model
       'cinema_name',
       's_start',
       's_end',
+        's_name',
       'row',
       'column',
         'phone',
+        'date',
     ];
 }

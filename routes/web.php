@@ -17,6 +17,7 @@ Route::get('/cinemas','HomeController@cinemas')->name('cinemas');
 Route::get('/cinema','HomeController@cinema')->name('cinema');
 Route::get('/showScreen','HomeController@showScreen')->name('showScreen');
 Route::get('/selectSeat','HomeController@selectSeat')->name('selectSeat');
+Route::any('/ticket','HomeController@ticket')->name('ticket');
 //Route::view('/selectSeat','user.selectSeat')->name('selectSeat');
 
 Route::view('/reg','user.register');

@@ -10,6 +10,8 @@ namespace App\Http\Controllers;
 
 use App\model\Screen;
 use App\model\Seat;
+use App\model\User;
+use App\model\Ticket;
 use GuzzleHttp\Client;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cookie;
@@ -111,8 +113,6 @@ class HomeController extends Controller
         $row = Seat::where('sId','=',$sId)
             ->max('row')
             ;
-
-
 //        dd($seats);
         return view('user.selectSeat',
             [
@@ -125,7 +125,58 @@ class HomeController extends Controller
 
     }
 
+    public function ticket(Request $request)
+    {
+        $ticket = null;
+        $movieName = $request->movieName;
+        $cinemaName = $request->cinemaName;
+        $screenId = $request->screenId;
+        $allPrice = $request->allPrice;
+//        dd($movieName,$cinemaName,$screenId,$allPrice);
+        $screen = Screen::find($screenId);
+//        dd($screen);
+        $s_name = $screen->s_name;
+        $s_start = $screen->s_start;
+        $s_end = $screen->s_end;
+        $s_date = $screen->date;
+//        dd($request);
+        $username = $_COOKIE['username'];
+        $user = User::where('username','=',$username)->first();
+        $phone = $user->phone;
+        $user->money -= $allPrice;
+        $user->save();
+        $rowArr = $_POST['rowArr'];
+        $columnArr = $_POST['columnArr'];
+//        dd($rowArr[1],$columnArr[1]);
+        $rowArrLength = count($rowArr);
+        $columnArrLength = count($columnArr);
+        for ($i=1;$i<$rowArrLength;$i++)
+        {
+            $ticket = Ticket::create([
+                'username' => $username,
+                'movie_name' => $movieName,
+                'cinema_name' => $cinemaName,
+                's_start' => $s_start,
+                's_end' => $s_end,
+                's_name' => $s_name,
+                'date' => $s_date,
+                'phone' => $phone,
+                'row' => $rowArr[$i],
+                'column' => $columnArr[$i],
+            ]);
+        }
+        if($ticket)
+        {
+            return 'success';
+        }
+        else
+        {
+            return 'fail';
+        }
 
+
+
+    }
 
 
 

@@ -14,6 +14,6 @@ class EncryptCookies extends Middleware
     protected $except = [
         'movieId',
         'cinemaId',
-
+        'username',
     ];
 }

@@ -173,6 +173,7 @@
             /*选座*/
             $rowArr = [];
             $columnArr = [];
+
             $('.selectable').map(function (i) {
                 $i = 0;
 //                $sellPrice = $('.sellPrice').attr('data-price');
@@ -268,13 +269,14 @@
                 $screenId = $('.screen-id').attr('data-screen-id');
                 $allPrice = $('.allPrice').text();
 
-                   console.log($movieName,$cinemaName,$screenId,$allPrice);
-                   console.log($rowArr,$columnArr);
+
 
                 $('.ticket-tip').text('确认支付'+$allPrice+'元');
                 $('.confirm-ticket-modal').modal('show')
 
                 $('.confirm-pay').on('click',function () {
+//                    console.log($movieName,$cinemaName,$screenId,$allPrice);
+//                    console.log($rowArr,$columnArr);
                     $screenWidth = $(window).width();
                     $screenHeight = $(window).height();
                     setTimeout(function () {
@@ -289,9 +291,22 @@
                                   'cinemaName':$cinemaName,
                                   'screenId':$screenId,
                                   'allPrice':$allPrice,
+                                    'rowArr':$rowArr,
+                                    'columnArr':$columnArr,
                                 },
                             success:function (data) {
-
+                                setTimeout(function () {
+                                    if(data = 'success')
+                                    {
+                                        $('.seat-bg').css({'display':'none'});
+                                        $('.seat-load').css({'display':'none'});
+                                        alert('购票成功');
+                                    }
+                                    else
+                                    {
+                                        alert('购票失败');
+                                    }
+                                },4000);
                             },
                             error:function () {
                               alert('error');
