@@ -222,20 +222,30 @@ class UserController extends Controller
         $index = 0;
         $ticketId = $request->ticketId;
         $ticket = Ticket::find($ticketId);
-//        dd($ticket);
+        $price = $ticket->price;
+//        dd($price);
         $row = $ticket->row;
         $column = $ticket->column;
         $sId = $ticket->sId;
+        $ticket->delete();
         $seat = Seat::where('row','=',$row)->where('column','=',$column)->first();
         $seat->status = $index;
         $bool = $seat->save();
+        $username = $_COOKIE['username'];
+        $user = User::where('username','=',$username)->first();
+        $user->money = $user->money+$price;
+        $user->save();
+        if($bool && $user)
+        {
+           return 'success';
+        }
+        else
+        {
+            return 'fail';
+        }
 
 
 
-
-
-
-        return $ticketId;
     }
 
 

@@ -160,8 +160,8 @@
     {{--确认选座的模态框 end--}}
     <div class="seat-bg">
         <div class="seat-load">
-            正在支付，请稍候。
             <img src="img/load01.gif" alt="">
+            <p>正在购票，请稍候</p>
         </div>
     </div>
 @endsection

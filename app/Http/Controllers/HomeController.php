@@ -152,6 +152,7 @@ class HomeController extends Controller
 //        dd($rowArr[1],$columnArr[1]);
         $rowArrLength = count($rowArr);
         $columnArrLength = count($columnArr);
+        $price = $allPrice/($rowArrLength-1);
         for ($i=1;$i<$rowArrLength;$i++)
         {
             $seat = Seat::where('sId','=',$sId)->where('row','=',$rowArr[$i])->where('column','=',$columnArr[$i])->first();
@@ -168,6 +169,7 @@ class HomeController extends Controller
                 's_name' => $s_name,
                 'date' => $s_date,
                 'phone' => $phone,
+                'price' => $price,
                 'row' => $rowArr[$i],
                 'column' => $columnArr[$i],
             ]);

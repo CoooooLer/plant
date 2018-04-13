@@ -1184,12 +1184,22 @@ a{
     display: none;
 }
 .seat-load{
-    font-size: 24px;
-    font-weight: 500;
-    position: absolute;
-    top:30%;
-    left: 40%;
-    display: none;
+    /*font-size: 24px;*/
+    /*font-weight: 500;*/
+    /*position: absolute;*/
+    /*top:30%;*/
+    /*left: 40%;*/
+    /*display: none;*/
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    width: 200px;
+    height: 200px;
+    margin-top: -100px;
+    margin-left: -100px;
+    text-align: center;
+    color: #fff;
+    z-index: 2;
 }
 
 

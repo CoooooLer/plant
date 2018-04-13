@@ -86,8 +86,9 @@
         $(document).ready(function () {
             $('.drop').map(function (i) {
                 $(this).on('click',function () {
+                    $_this = $(this);
                     $ticketId = $(this).attr('data-ticketId');
-                    console.log($ticketId);
+//                    console.log($ticketId);
                     $('.dropTicket').modal('show');
                     $('.btn-confirm').on('click',function () {
                         $.ajaxSetup({headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')}});
@@ -96,7 +97,13 @@
                             type:'post',
                             data:{'ticketId':$ticketId},
                             success:function (data) {
-                                console.log(data);
+//                                console.log(data);
+                                if(data === 'success')
+                                {
+//                                    console.log($_this.parents());
+                                    $_this.parents('tr').remove();
+                                    alert('退票成功');
+                                }
                             },
 
                         });

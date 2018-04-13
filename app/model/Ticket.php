@@ -30,5 +30,6 @@ class ticket extends Model
       'column',
         'phone',
         'date',
+        'price',
     ];
 }
