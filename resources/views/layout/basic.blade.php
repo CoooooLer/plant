@@ -18,10 +18,10 @@
                 <div class="logo"><img src="img/logo.png"></div>
                 <div class="header-nav">
                     <a href="{{ Route('home') }}" class="nav-unit header-nav-active primary">首页</a>
-                    <a href="{{ Route('movie') }}" class="nav-unit">电影</a>
-                    <a href="{{ Route('cinemas') }}" class="nav-unit">影院</a>
-                    <a class="nav-unit">榜单</a>
-                    <a class="nav-unit">热点</a>
+                    <a href="" class="nav-unit">多肉简介</a>
+                    <a href="" class="nav-unit">种植养护</a>
+                    <a class="nav-unit">萌图欣赏</a>
+                    <a class="nav-unit">种植日志</a>
                     <div class="nav-slider"></div>
                 </div>
                 <div class="search has-error">
@@ -65,7 +65,7 @@
     @section('footer')
 
         <div class="footer">
-            <p>友情链接：<a href="javascript:void(0)">猫眼电影</a>|<a href="">百度糯米</a></p>
+            <p>友情链接：<a href="javascript:void(0)">关于我们</a>|<a href="javascript:void(0)">广告投放</a></p>
             <p>@2018 时光电影 </p>
         </div>
         <script src="js/jquery.min.js"></script>
@@ -86,24 +86,24 @@
 //                    })
                 });
                 $('.header-nav a').on('click',function () {
-                    $(this).css({'color':'orange'}).siblings().css({'color':'#000'});
+                    $(this).css({'color':'#94b60e'}).siblings().css({'color':'#000'});
                 });
                 switch(window.location.href)
                 {
                     case $('.header-nav a').eq(1).attr('href'):
-                        $('.header-nav a').eq(1).css({'color':'orange'});
+                        $('.header-nav a').eq(1).css({'color':'#94b60e'});
                         console.log(window.location.href);
                         break;
                     case $('.header-nav a').eq(2).attr('href'):
-                        $('.header-nav a').eq(2).css({'color':'orange'});
+                        $('.header-nav a').eq(2).css({'color':'#94b60e'});
                         console.log(window.location.href);
                         break;
                     case $('.header-nav a').eq(3).attr('href'):
-                        $('.header-nav a').eq(3).css({'color':'orange'});
+                        $('.header-nav a').eq(3).css({'color':'#94b60e'});
                         console.log(window.location.href);
                         break;
                     case $('.header-nav a').eq(4).attr('href'):
-                        $('.header-nav a').eq(4).css({'color':'orange'});
+                        $('.header-nav a').eq(4).css({'color':'#94b60e'});
                         console.log(window.location.href);
                         break;
                 }

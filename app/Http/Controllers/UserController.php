@@ -209,41 +209,22 @@ class UserController extends Controller
         }
     }
 
-    public function personal()
+    public function yanghu(Request $request)
     {
-        $username = $_COOKIE['username'];
-        $tickets = Ticket::where('username','=',$username)->get();
-//        dd($ticket);
-        return view('user.personal',['tickets' => $tickets]);
-    }
-
-    public function dropTicket(Request $request)
-    {
-        $index = 0;
-        $ticketId = $request->ticketId;
-        $ticket = Ticket::find($ticketId);
-        $price = $ticket->price;
-//        dd($price);
-        $row = $ticket->row;
-        $column = $ticket->column;
-        $sId = $ticket->sId;
-        $ticket->delete();
-        $seat = Seat::where('row','=',$row)->where('column','=',$column)->first();
-        $seat->status = $index;
-        $bool = $seat->save();
-        $username = $_COOKIE['username'];
-        $user = User::where('username','=',$username)->first();
-        $user->money = $user->money+$price;
-        $user->save();
-        if($bool && $user)
+        $title = $request->title;
+        $content = $request->content;
+        $img = $request->file('img');
+//        dd($title,$img);
+        if(!$title || !$content)
         {
-           return 'success';
+            $request->session()->flash('warning','标题、内容不能为空');
+            return redirect()->back();
         }
-        else
+        if(empty($img))
         {
-            return 'fail';
-        }
 
+        }
+        $size = $img->getSize();
 
 
     }
