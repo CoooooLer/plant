@@ -7,6 +7,7 @@
 @endsection
 
 @section('content')
+
     <div class="container" style="margin-top: 81px">
 
         <div class="content-box">
@@ -18,10 +19,9 @@
                         标题:<input type="text" class="text" name="title"  placeholder="请输人文章标题" style="width: 550px"><br>
                         内容:<br> <textarea name="content" id="" cols="" rows="2" style="width: 700px;height: 200px;" placeholder="请输入内容"> </textarea><br>
                         上传图片：<input type="file" class="file" name="img">
-                        <div style="text-align: right;">
-                            <button type="submit" class="tijiao btn btn-success">发表文章</button>
-                        </div>
-
+                            <div style="text-align: right;">
+                                <button type="submit" class="tijiao btn btn-success">发表文章</button>
+                            </div>
                         {{--<div class="msg-box">--}}
 
                         {{--</div>--}}
@@ -31,12 +31,14 @@
                 @include('layout.message')
                 <div class="yanghu-title">
                     <div style="display: flex;justify-content: space-between">
-                        <span class="fenlei-title">分类：多肉植物首页</span>
-                        {{--<div class="add-box">--}}
-                            {{--<span class="glyphicon glyphicon-plus add-plus" ></span>--}}
-                        {{--</div>--}}
+                        <span class="fenlei-title">分类：种植养护</span>
+                        @if(Cookie::has('username'))
+                            <div class="add-box">
+                                <span class="glyphicon glyphicon-plus add-plus" ></span>
+                            </div>
+                        @endif
                     </div>
-                    <p>介绍多肉植物的一些基本信息。</p>
+                    <p>介绍多肉植物的一些种植方法，以及多肉植物生长过程中可能遇到的一些问题的养护方法。</p>
                 </div>
                 <div class="yanghu-content">
                     @foreach($posts as $post)
@@ -66,7 +68,7 @@
                 <div class="today-list">
                     @foreach($posts as $post)
                         <div class="today-unit">
-                            <a href="single?id={{ $post->id }}" target="_blank"class="today-unit-a">
+                            <a href="single?id={{ $post->id }}" target="_blank" class="today-unit-a">
                                 <div class="today-unit-left">
                                     <span class="addColor-today"></span>
                                     <span>{{ $post->title }}</span>
@@ -94,10 +96,8 @@
 //                $('.add-post').css({'display':'block','transition':'all ease .5s'});
                 $('.add-post').toggleClass('active');
             });
-
-
-
         });
+
     </script>
 
 @endsection

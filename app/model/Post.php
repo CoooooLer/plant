@@ -24,6 +24,7 @@ class Post extends Model
         'img_local_path',
         'img_url',
         'type',
+        'username'
     ];
 
 }

@@ -61,11 +61,12 @@ body{
     width:100%;
     height: 100%;
     cursor: pointer;
+
 }
 .header-nav .nav-unit:hover{
     /*background-color: #eb5524;*/
-    color: #ffffff;
     text-decoration: none;
+    color: #ffffff!important;
 }
 .nav-slider{
     position: absolute;
@@ -430,29 +431,93 @@ a{
 }
 /* banner end*/
 /*container start*/
+.content-home-today{
+    width: 340px;
+    margin-left: 20px;
+    border:1px solid #ededed;
+}
+.today-unit{
+
+}
+
+.today-unit .today-unit-a{
+    width:100%;
+    height:100%;
+    display: flex;
+    justify-content: space-between;
+    padding: 5px;
+}
+.today-unit a:hover{
+    background: #f2f2f2;
+    color: #eb5524;
+    text-decoration: none;
+}
+.today-first-box{
+    display: flex;
+    justify-content: flex-start;
+
+}
+.today-first-box:hover{
+    text-decoration: none;
+    color: #eb5524;
+}
+.today-first{
+    /*margin-bottom: 11px;*/
+    border: 1px solid #efefef;
+}
+.today-first img{
+    width: 120px;
+    height: 78px;
+}
+.today-first-info{
+    padding: 10px 10px 0 10px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+.addColor-today{
+    color: #94b60e;
+
+}
+
+
 .container{
-    width: 1230px;
+    width: 1200px;
     margin:0 auto;
+    padding: 0;
+    /*background: #ededed;*/
     /*border:1px solid red;*/
 }
 
 /*home middle*/
+.container .content-box{
+    display: flex;
+    justify-content: space-between;
+    border:1px solid #ededed;
+}
 .container .content{
     width: 800px;
+    border:1px solid #ededed;
 }
+
 .yanghu-title{
     padding: 15px;
     background: #F8F8F8;
 }
+.yanghu-title .fenlei-title{
+    font-size: 18px;
+    font-weight: 700;
+}
 .yanghu-content{
     z-index: 1;
-    padding: 10px 15px;
+    padding: 0 15px 10px 15px;
     border-bottom: 1px solid #E1E1E1;
 }
 .yanghu-unit{
     width: 100%;
     list-style: none;
     margin-bottom: 20px;
+    margin-top: 10px;
 }
 .yanghu-unit h2{
     margin: 0 -15px 20px -15px;
@@ -477,6 +542,7 @@ a{
 .yanghu-unit-right{
     display: flex;
     flex-direction: column;
+    width: 515px;
 }
 .yanghu-unit-right .right-content {
     text-indent: 25px;
@@ -484,10 +550,113 @@ a{
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 3;
     overflow: hidden;
+    height: 44px;
 
 }
+.yanghu-unit-right .tips{
+    color: #999;
+}
+
+
+.wrapper{
+    width: 360px;
+    height: 600px;
+    border:1px solid red;
+    padding-left: 20px;
+}
+
+/*发表帖子 start*/
+.add-post{
+    width:100%;
+    height: 0;
+    border:1px solid #eeeeee;
+    padding: 0 20px;
+    /*display: none;*/
+    overflow: hidden;
+    transition: all ease 0.8s;
+
+}
+.add-box{
+    height: 36px;
+    width: 36px;
+    background: #ffffff;
+    border-radius: 50%;
+    text-align: center;
+    cursor: pointer;
+}
+.add-plus{
+    font-size: 50px;
+    color: #4cae4c;
+    line-height: 26px!important;
+}
+.active{
+    height: 400px;
+    transition: all ease 0.8s;
+}
+/*发表帖子 end*/
+/*
+首页、简介、养护三个页面的Css
+*/
 /*home页面 end*/
 
+/*萌图欣赏 start*/
+.mengtu{
+    border:1px solid #ededed;
+    display: flex;
+    flex-wrap: wrap;
+}
+.mengtu .img-box{
+    overflow: hidden;
+}
+.mengtu .img-box img{
+    height: auto;
+    max-width: 360px;
+    min-width: 150px;
+    transition: all ease 0.5s;
+    margin:5px ;
+}
+.mengtu .img-box img:hover{
+    transform: scale(1.5);
+    transition: all ease 0.5s;
+}
+/*萌图欣赏 end*/
+/*详情页面 start*/
+.single-box{
+    width:40%;
+    margin:0 auto;
+    border:1px solid #eeeeee;
+    background: #F8F8F8;
+    height: 90vh;
+}
+.single-title{
+    padding: 10px;
+    font-size: 22px;
+    font-weight:700;
+    color: #94b60e;
+}
+.single-info{
+    padding: 0 10px;
+}
+.single-info span{
+    padding:5px 10px;
+    color: #aaaaaa;
+}
+.single-box .img-box{
+    display: flex;
+    justify-content: center;
+    margin: 20px;
+}
+.single-box .img-box img{
+    height: auto;
+    max-width: 90%;
+    min-width: 50%;
+}
+.single-content{
+    text-indent: 20px;
+    padding: 20px;
+    color: #776B5D;
+}
+/*详情页面 end*/
 
 /*admin  管理中心 start*/
 .page-right{

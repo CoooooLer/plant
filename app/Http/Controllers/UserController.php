@@ -17,6 +17,7 @@ use App\model\User;
 use App\model\Ticket;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Storage;
 
 
 class UserController extends Controller
@@ -111,6 +112,7 @@ class UserController extends Controller
     /*
      * 用户登录验证
      * */
+    /*用户登录*/
     public function login(Request $request)
     {
         $username = $_POST['username'];
@@ -156,11 +158,13 @@ class UserController extends Controller
 
     }
 
+    /*用户退出*/
     public function logOut()
     {
         return redirect()->route('home')->cookie('username','',-1);
     }
 
+    /*用户编辑信息*/
     public function editPerson()
     {
         $username = $_GET['username'];
@@ -168,6 +172,7 @@ class UserController extends Controller
         return view('user.editPerson',['user' => $user]);
     }
 
+    /*保存用户编辑信息*/
     public function editPersonInfo()
     {
         $password = $_POST['password'];
@@ -210,11 +215,20 @@ class UserController extends Controller
         }
     }
 
-    public function yanghu(Request $request)
+    /*主页面*/
+    public function home()
     {
+        $posts = Post::where('type','=','yanghu')->orWhere('type','=','jianjie')->get();
+        return view('home',['posts' => $posts]);
+    }
+
+    /*简介页面的发表帖子*/
+    public function jianjie(Request $request)
+    {
+        $username = $_COOKIE['username'];
+        $type = $request->type;
         $title = $request->title;
         $content = $request->content;
-        $type = $request->type;
         $img = $request->file('img');
         $imgName = null;
         $imgPath = null;
@@ -232,6 +246,7 @@ class UserController extends Controller
                 'title' => $title,
                 'content' => $content,
                 'type' => $type,
+                'username' => $username,
             ]);
 
             if($post)
@@ -255,7 +270,7 @@ class UserController extends Controller
                 $imgArr = ['jpg','jpeg','png','bmp','webp'];
                 if(in_array($ext,$imgArr))
                 {
-                    $imgPath = $img->store('/public/yanghu');
+                    $imgPath = $img->store('/public/'.$type);
                     $imgUrl = asset('storage/'.substr($imgPath,7));
                     $post = Post::create([
                         'title' => $title,
@@ -264,11 +279,11 @@ class UserController extends Controller
                         'img_local_path' => $imgPath,
                         'img_url' => $imgUrl,
                         'type' => $type,
-
+                        'username' => $username,
                     ]);
                     if($post)
                     {
-                        $request->session()->flash('success','发表成功,请刷新查看内容');
+                        $request->session()->flash('success','发表成功');
                         return redirect()->back();
                     }
                     else
@@ -279,7 +294,7 @@ class UserController extends Controller
                 }
                 else
                 {
-                    $request->session()->flash('warning','文件格式不正确');
+                    $request->session()->flash('warning','图片格式不正确');
                     return redirect()->back();
                 }
 
@@ -292,12 +307,219 @@ class UserController extends Controller
         }
 
 
+
     }
 
-    public function home()
+    /*简介页面的内容*/
+    public function jianjiepage()
     {
-        $posts = Post::all();
-        return view('home',['posts' => $posts]);
+        $posts = Post::where('type','=','jianjie')->get();
+//        dd($posts);
+        return view('user.jianjie',['posts' => $posts]);
+    }
+
+    /*养护页面发表帖子*/
+    public function yanghu(Request $request)
+    {
+        $username = $_COOKIE['username'];
+        $type = $request->type;
+        $title = $request->title;
+        $content = $request->content;
+        $img = $request->file('img');
+        $imgName = null;
+        $imgPath = null;
+        $imgUrl = null;
+//        dd($title,$img);
+        if(!$title || !$content)
+        {
+            $request->session()->flash('warning','标题、内容不能为空');
+            return redirect()->back();
+        }
+
+        if(empty($img))
+        {
+            $post = Post::create([
+                'title' => $title,
+                'content' => $content,
+                'type' => $type,
+                'username' => $username,
+            ]);
+
+            if($post)
+            {
+                $request->session()->flash('success','发表成功');
+                return redirect()->back();
+            }
+            else
+            {
+                $request->session()->flash('warning','发表失败');
+                return redirect()->back();
+            }
+        }
+        else
+        {
+
+            if($img->isValid())
+            {
+                $imgName = $img->getClientOriginalName();
+                $ext = $img->getClientOriginalExtension();
+                $imgArr = ['jpg','jpeg','png','bmp','webp'];
+                if(in_array($ext,$imgArr))
+                {
+                    $imgPath = $img->store('/public/'.$type);
+                    $imgUrl = asset('storage/'.substr($imgPath,7));
+                    $post = Post::create([
+                        'title' => $title,
+                        'content' => $content,
+                        'img_name' => $imgName,
+                        'img_local_path' => $imgPath,
+                        'img_url' => $imgUrl,
+                        'type' => $type,
+                        'username' => $username,
+                    ]);
+                    if($post)
+                    {
+                        $request->session()->flash('success','发表成功');
+                        return redirect()->back();
+                    }
+                    else
+                    {
+                        $request->session()->flash('warning','发表失败');
+                        return redirect()->back();
+                    }
+                }
+                else
+                {
+                    $request->session()->flash('warning','图片格式不正确');
+                    return redirect()->back();
+                }
+
+            }
+            else
+            {
+                $request->session()->flash('warning','图片无效');
+            }
+
+        }
+
+
+
+    }
+
+    /*养护页面的内容*/
+    public function yanghupage()
+    {
+        $posts = Post::where('type','=','yanghu')->get();
+//        dd($posts);
+        return view('user.yanghu',['posts' => $posts]);
+    }
+
+    /*萌图页面*/
+    public function mengtu()
+    {
+        $posts = Post::where('type','=','yanghu')->orWhere('type','=','jianjie')->get();
+        return view('user.mengtu',['posts' => $posts]);
+    }
+
+    /*种植日志页面的发表日志*/
+    public function rizhi(Request $request)
+    {
+        $username = $_COOKIE['username'];
+        $type = $request->type;
+        $title = $request->title;
+        $content = $request->content;
+//        dd($title,$img);
+        if(!$title || !$content)
+        {
+            $request->session()->flash('warning','标题、内容不能为空');
+            return redirect()->back();
+        }
+        else
+        {
+            $post = Post::create([
+                'title' => $title,
+                'content' => $content,
+                'type' => $type,
+                'username' => $username,
+            ]);
+
+            if ($post) {
+                $request->session()->flash('success', '发表成功');
+                return redirect()->back();
+            } else {
+                $request->session()->flash('warning', '发表失败');
+                return redirect()->back();
+            }
+        }
+
+
+    }
+
+    /*种植日志页面的内容*/
+    public function rizhipage()
+    {
+        $posts = Post::where('type','=','rizhi')->get();
+//        dd($posts);
+        return view('user.rizhi',['posts' => $posts]);
+    }
+
+    /*详情页*/
+    public function single()
+    {
+        $id = $_GET['id'];
+        $post = Post::find($id);
+        return view('user.single',['post' => $post]);
+    }
+
+    /*个人中心*/
+    public function personal()
+    {
+        $username = $_COOKIE['username'];
+        $posts = Post::where('username','=',$username)->get();
+        return view('user.personal',['posts' => $posts]);
+    }
+
+    /*删除文章*/
+    public function dropPost(Request $request)
+    {
+        $id = $request->id;
+//        if(empty($id))
+//        {
+//            $request->session()->flash('warning','已删除');
+//
+//        }
+        $post = Post::find($id);
+        $imgPath = $post->img_local_path;
+        $bool = $post->delete();
+        Storage::delete($imgPath);
+        if($bool)
+        {
+//            $request->session()->flash('success','删除成功');
+            return 'success';
+        }
+        else
+        {
+//            $request->session()->flash('warning','删除失败');
+            return 'fail';
+
+        }
+
+    }
+
+    /*搜索*/
+    public function homeSearch(Request $request)
+    {
+        $keyword = $request->keyword;
+        $posts = Post::where('title','like','%'.$keyword.'%')->get();
+//        dd($posts);
+        if(!empty($posts))
+        {
+            return $posts;
+        }
+        else
+        {
+            return null;
+        }
     }
 
 

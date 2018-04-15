@@ -18,14 +18,14 @@
                 <div class="logo"><img src="img/logo.png"></div>
                 <div class="header-nav">
                     <a href="{{ Route('home') }}" class="nav-unit header-nav-active primary">首页</a>
-                    <a href="" class="nav-unit">多肉简介</a>
-                    <a href="" class="nav-unit">种植养护</a>
-                    <a class="nav-unit">萌图欣赏</a>
-                    <a class="nav-unit">种植日志</a>
+                    <a href="{{ Route('jianjiepage') }}" class="nav-unit">多肉简介</a>
+                    <a href="{{ Route('yanghupage') }}" class="nav-unit">种植养护</a>
+                    <a href="{{ Route('rizhipage') }}" class="nav-unit">种植日志</a>
+                    <a href="{{ Route('mengtu') }}" class="nav-unit">萌图欣赏</a>
                     <div class="nav-slider"></div>
                 </div>
                 <div class="search has-error">
-                    <input class="form-control keyword " id="sea-keyword" placeholder="找电影...按Enter搜索" style="height: 40px">
+                    <input class="form-control keyword" id="sea-keyword" placeholder="按Enter搜索" style="height: 40px">
                 </div>
                 <div class="nav-login" role="navigation">
 
@@ -66,7 +66,7 @@
 
         <div class="footer">
             <p>友情链接：<a href="javascript:void(0)">关于我们</a>|<a href="javascript:void(0)">广告投放</a></p>
-            <p>@2018 时光电影 </p>
+            <p>@2018 多肉联萌 </p>
         </div>
         <script src="js/jquery.min.js"></script>
         {{--<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>--}}
@@ -92,23 +92,67 @@
                 {
                     case $('.header-nav a').eq(1).attr('href'):
                         $('.header-nav a').eq(1).css({'color':'#94b60e'});
-                        console.log(window.location.href);
+//                        console.log(window.location.href);
                         break;
                     case $('.header-nav a').eq(2).attr('href'):
                         $('.header-nav a').eq(2).css({'color':'#94b60e'});
-                        console.log(window.location.href);
+//                        console.log(window.location.href);
                         break;
                     case $('.header-nav a').eq(3).attr('href'):
                         $('.header-nav a').eq(3).css({'color':'#94b60e'});
-                        console.log(window.location.href);
+//                        console.log(window.location.href);
                         break;
                     case $('.header-nav a').eq(4).attr('href'):
                         $('.header-nav a').eq(4).css({'color':'#94b60e'});
-                        console.log(window.location.href);
+//                        console.log(window.location.href);
                         break;
                 }
 
                 //搜索
+                $.ajaxSetup({headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')}});
+                $('.keyword').on('keypress', function (e) {
+                    if (e.keyCode == 13) {
+                        $keyword = $('.keyword').val();
+                        $.ajax({
+                            url:'homeSearch',
+                            type:'post',
+                            data:{'keyword':$keyword},
+                            success:function (data) {
+//                            console.log(data)
+                                $html = '';
+                                if(data !== null)
+                                {
+                                    $(data).each(function (k,v) {
+                                        $html+= `
+                                    <div class="yanghu-unit">
+                                        <h2><a href="single?id=${v.id}" target="_blank">${v.title}</a></h2>
+                                        </div>
+                                        <div class="yanghu-unit-content">
+                                            <div class="img">
+                                                <a href="single?id=${v.d}" target="_blank">
+                                                    <img src="${v.img_url}" alt="">
+                                                </a>
+                                            </div>
+                                            <div class="yanghu-unit-right">
+                                                <div class="right-content">${v.content}</div>
+                                                <div style="text-align: right;margin: 10px 0;">
+                                                    <a  href="single?id=${v.id}" target="_blank"><input type="button" class="btn btn-success" value="阅读全文"></a>
+                                                </div>
+                                                <div class="tips">多肉简介&nbsp;&nbsp;多肉小知识&nbsp;&nbsp;多肉养成</div>
+                                            </div>
+                                    </div>
+                                `
+                                        $('.yanghu-content').html($html);
+                                    });
+                                }
+                                else
+                                {
+                                    $('.yanghu-content').html("<h1 style='color: #000000;margin: 0 auto;'>无相关项目,请重新输入。。。</h1>");
+                                }
+                            }
+                        });
+                    }
+                });
 
             })
 
