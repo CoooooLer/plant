@@ -10,6 +10,7 @@ namespace App\Http\Controllers;
 
 
 
+use App\model\Post;
 use App\model\Screen;
 use App\model\Seat;
 use App\model\User;
@@ -213,20 +214,90 @@ class UserController extends Controller
     {
         $title = $request->title;
         $content = $request->content;
+        $type = $request->type;
         $img = $request->file('img');
+        $imgName = null;
+        $imgPath = null;
+        $imgUrl = null;
 //        dd($title,$img);
         if(!$title || !$content)
         {
             $request->session()->flash('warning','标题、内容不能为空');
             return redirect()->back();
         }
+
         if(empty($img))
         {
+            $post = Post::create([
+                'title' => $title,
+                'content' => $content,
+                'type' => $type,
+            ]);
+
+            if($post)
+            {
+                $request->session()->flash('success','发表成功,请刷新查看内容');
+                return redirect()->back();
+            }
+            else
+            {
+                $request->session()->flash('warning','发表失败');
+                return redirect()->back();
+            }
+        }
+        else
+        {
+
+            if($img->isValid())
+            {
+                $imgName = $img->getClientOriginalName();
+                $ext = $img->getClientOriginalExtension();
+                $imgArr = ['jpg','jpeg','png','bmp','webp'];
+                if(in_array($ext,$imgArr))
+                {
+                    $imgPath = $img->store('/public/yanghu');
+                    $imgUrl = asset('storage/'.substr($imgPath,7));
+                    $post = Post::create([
+                        'title' => $title,
+                        'content' => $content,
+                        'img_name' => $imgName,
+                        'img_local_path' => $imgPath,
+                        'img_url' => $imgUrl,
+                        'type' => $type,
+
+                    ]);
+                    if($post)
+                    {
+                        $request->session()->flash('success','发表成功,请刷新查看内容');
+                        return redirect()->back();
+                    }
+                    else
+                    {
+                        $request->session()->flash('warning','发表失败');
+                        return redirect()->back();
+                    }
+                }
+                else
+                {
+                    $request->session()->flash('warning','文件格式不正确');
+                    return redirect()->back();
+                }
+
+            }
+            else
+            {
+                $request->session()->flash('warning','图片无效');
+            }
 
         }
-        $size = $img->getSize();
 
 
+    }
+
+    public function home()
+    {
+        $posts = Post::all();
+        return view('home',['posts' => $posts]);
     }
 
 

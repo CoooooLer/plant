@@ -12,7 +12,7 @@ class initPlant extends Command
      *
      * @var string
      */
-    protected $signature = 'plant:inti';
+    protected $signature = 'plant:init';
 
     /**
      * The console command description.

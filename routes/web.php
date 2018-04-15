@@ -12,7 +12,7 @@
 */
 /*相关*/
 
-Route::view('/','home')->name('home');
+Route::any('/','UserController@home')->name('home');
 Route::any('/yanghu','UserController@yanghu')->name('yanghu');
 /*用户相关*/
 Route::view('/reg','user.register');

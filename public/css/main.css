@@ -7,7 +7,8 @@ a{
     text-decoration: none;
 }
 a:hover{
-    text-decoration: none;
+    text-decoration: none!important;
+    color: #94b60e!important;
 
 }
 ul li{
@@ -428,13 +429,63 @@ a{
     }
 }
 /* banner end*/
-/*container 正在热映 start*/
+/*container start*/
 .container{
     width: 1230px;
     margin:0 auto;
     /*border:1px solid red;*/
 }
 
+/*home middle*/
+.container .content{
+    width: 800px;
+}
+.yanghu-title{
+    padding: 15px;
+    background: #F8F8F8;
+}
+.yanghu-content{
+    z-index: 1;
+    padding: 10px 15px;
+    border-bottom: 1px solid #E1E1E1;
+}
+.yanghu-unit{
+    width: 100%;
+    list-style: none;
+    margin-bottom: 20px;
+}
+.yanghu-unit h2{
+    margin: 0 -15px 20px -15px;
+    padding: 8px 15px;
+    border-top: 1px solid #eee;
+    border-bottom: 1px solid #eee;
+    background: #FDFDFD;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 24px;
+}
+.yanghu-unit-content{
+    display: flex;
+    justify-content: flex-start;
+}
+.yanghu-unit-content img{
+    height: auto;
+    max-width: 240px;
+    min-width: 150px;
+    padding-right: 10px;
+}
+.yanghu-unit-right{
+    display: flex;
+    flex-direction: column;
+}
+.yanghu-unit-right .right-content {
+    text-indent: 25px;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+    overflow: hidden;
+
+}
 /*home页面 end*/
 
 
