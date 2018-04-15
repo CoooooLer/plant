@@ -10,7 +10,7 @@
 @section('title','添加用户')
 
 @section('header')
-
+    @parent
 @endsection
 
 @section('content')
@@ -72,7 +72,7 @@
             $('.btn-create-user').on('click',function() {
                 $.ajaxSetup({headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')}});
                 $.ajax({
-                    url:'createUser',
+                    url:'createUserInfo',
                     type:'post',
                     data:$('.create-user-form').serialize(),
                     success:function (data) {

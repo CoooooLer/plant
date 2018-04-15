@@ -29,7 +29,15 @@
                                     <tr>
                                         <td>{{ $post->id }}</td>
                                         <td>{{ $post->title }}</td>
-                                        <td>{{ $post->type }}</td>
+                                        <td>
+                                            @if($post->type == 'jianjie')
+                                                多肉简介
+                                                @elseif($post->type == 'yanghu')
+                                                种植养护
+                                                @else
+                                                种植日志
+                                            @endif
+                                        </td>
                                         <td>{{ $post->created_at }}</td>
                                         <td>
                                             <input type="button"class="btn btn-danger btn-sm drop" data-id={{ $post->id }} value="删除" />

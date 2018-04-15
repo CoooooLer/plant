@@ -24,7 +24,7 @@
                     <div class="m-box">
                         <div class="box-head">
                             <strong class="box-title">用户管理</strong>
-                            <a href="create" type="button" class="btn btn-success btn-sm pull-right">
+                            <a href="createUser" type="button" class="btn btn-success btn-sm pull-right">
                                 <span class="glyphicon glyphicon-plus"></span>
                                 添加用户
                             </a>
@@ -84,7 +84,7 @@
                     <h4 class="modal-title">删除用户（慎重）</h4>
                 </div>
                 <div class="modal-body">
-                    <p>此操作会删除用户的相关信息</p>
+                    <p>此操作会删除用户的相关信息及发表的文章</p>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-success" data-dismiss="modal">取消</button>
@@ -170,7 +170,7 @@
             $('.drop').on('click',function () {
                 $('#drop').modal('show');//调用模态框
                 var $_this = $(this);
-                var $uId = ($('.drop').attr('id'));
+                var $uId = ($(this).attr('id'));
 //                console.log($id);
                 $.ajaxSetup({headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')}});
                 $('#btn-drop-confirm').on('click',function () {

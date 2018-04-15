@@ -9,7 +9,9 @@
 namespace App\Http\Controllers;
 
 
+use App\model\Post;
 use App\model\User;
+use Symfony\Polyfill\Php70\Php70;
 
 class AdminController extends Controller
 {
@@ -33,7 +35,10 @@ class AdminController extends Controller
         $uId = $_POST['uId'];
 //        dd($uId);
         $user = User::find($uId);
+        $username = $user->username;
         $user->delete();
+        Post::where('username','=',$username)->delete();
+
         return '1';
     }
 

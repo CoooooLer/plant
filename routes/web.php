@@ -44,7 +44,8 @@ Route::any('/userList','AdminController@userList')->name('userList');
 Route::any('/deleteUser','AdminController@deleteUser')->name('deleteUser');
 Route::any('/userEdit','AdminController@userEdit')->name('userEdit');
 Route::any('/editUserInfo','AdminController@editUserInfo')->name('editUserInfo');
-Route::any('/createUser','AdminController@createUser')->name('createUser');
+Route::any('/createUserInfo','AdminController@createUser')->name('createUserInfo');
+Route::view('/createUser','admin.userCreate')->name('createUser');
 
 /*页面测试*/
 
