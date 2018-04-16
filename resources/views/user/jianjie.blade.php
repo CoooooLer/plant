@@ -35,7 +35,7 @@
                         <span class="fenlei-title">分类：多肉简介</span>
                         @if(Cookie::has('username'))
                             <div class="add-box">
-                                <span class="glyphicon glyphicon-plus add-plus" ></span>
+                                <span class="glyphicon glyphicon-plus add-plus"  ></span>
                             </div>
                         @endif
                     </div>
@@ -106,16 +106,4 @@
 
 @section('footer')
     @parent
-    {{--<script src="https://unpkg.com/axios/dist/axios.min.js"></script>--}}
-    {{--<script src="js/banner.js"></script>--}}
-    <script>
-        $(document).ready(function () {
-            $('.add-box').on('click',function () {
-//                $('.add-post').css({'display':'block','transition':'all ease .5s'});
-                $('.add-post').toggleClass('active');
-            });
-        });
-
-    </script>
-
 @endsection

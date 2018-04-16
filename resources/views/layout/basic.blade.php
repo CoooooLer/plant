@@ -28,9 +28,7 @@
                     <input class="form-control keyword" id="sea-keyword" placeholder="按Enter搜索" style="height: 40px">
                 </div>
                 <div class="nav-login" role="navigation">
-
                     @if(Cookie::has('username'))
-
                         <ul class="nav-login-lo">
                             <li class="dropdown ">
                                 <a href="#" class="" data-toggle="dropdown" role="button"  aria-expanded="true">&nbsp;&nbsp;{{ Cookie::get('username') }}&nbsp;&nbsp;<span class="caret"></span></a>
@@ -42,10 +40,6 @@
                                         <li><a href="userList"><span class="glyphicon glyphicon-user"></span>管理中心</a></li>
                                     @endif
                                     <li><a href=" {{ Route('logOut') }} "><span class="glyphicon glyphicon-user"></span>退出登录</a></li>
-                                    {{--<li><a href="{{ Route('user.show') }}"><span class="glyphicon glyphicon-user"></span>个人中心</a></li>--}}
-                                    {{--<li><a href="{{ Route('user.project') }}"><span class="glyphicon glyphicon-list"></span>我的项目</a></li>--}}
-                                    {{--<li><a href="{{ Route('dashboard') }}"><span class="glyphicon glyphicon-home"></span>后台管理</a></li>--}}
-                                    {{--<li><a href="{{ Route('user.logOut') }}"><span class="glyphicon glyphicon-log-out"></span>退出登录</a></li>--}}
                                 </ul>
                             </li>
                         </ul>
@@ -62,6 +56,8 @@
     @section('content')
         @show
 </div>
+
+
     @section('footer')
 
         <div class="footer">
@@ -108,7 +104,7 @@
                         break;
                 }
 
-                //搜索
+                //全局搜索
                 $.ajaxSetup({headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')}});
                 $('.keyword').on('keypress', function (e) {
                     if (e.keyCode == 13) {
@@ -151,6 +147,21 @@
                                 }
                             }
                         });
+                    }
+                });
+
+                /*发表文章图标切换*/
+                $('.add-box').on('click',function () {
+//                $('.add-post').css({'display':'block','transition':'all ease .5s'});
+                    $('.add-post').toggleClass('active');
+                    $attr = $('.add-plus').attr('class');
+                    if($attr.indexOf('glyphicon-plus')>0)
+                    {
+                        $('.add-plus').attr('class','glyphicon glyphicon-minus add-plus');
+                    }
+                    else
+                    {
+                        $('.add-plus').attr('class','glyphicon glyphicon-plus add-plus');
                     }
                 });
 

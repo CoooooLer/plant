@@ -105,16 +105,4 @@
 
 @section('footer')
     @parent
-    {{--<script src="https://unpkg.com/axios/dist/axios.min.js"></script>--}}
-    {{--<script src="js/banner.js"></script>--}}
-    <script>
-        $(document).ready(function () {
-            $('.add-box').on('click',function () {
-//                $('.add-post').css({'display':'block','transition':'all ease .5s'});
-                $('.add-post').toggleClass('active');
-            });
-        });
-
-    </script>
-
 @endsection
