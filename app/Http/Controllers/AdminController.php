@@ -13,6 +13,8 @@ use App\model\Post;
 use App\model\User;
 use Symfony\Polyfill\Php70\Php70;
 
+date_default_timezone_set('PRC');
+
 class AdminController extends Controller
 {
     /*主要处理用户的信息*/

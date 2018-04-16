@@ -435,6 +435,8 @@ a{
     width: 340px;
     margin-left: 20px;
     border:1px solid #ededed;
+    height: 450px;
+    overflow: hidden;
 }
 .today-unit{
 
@@ -593,10 +595,13 @@ a{
     height: 400px;
     transition: all ease 0.8s;
 }
-/*发表帖子 end*/
+.glyphicon{
+    color: #4cae4c;
+}
 /*
 首页、简介、养护三个页面的Css
 */
+/*发表帖子 end*/
 /*home页面 end*/
 
 /*萌图欣赏 start*/

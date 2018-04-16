@@ -19,6 +19,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
 
+date_default_timezone_set('PRC');
 
 class UserController extends Controller
 {
@@ -215,7 +216,7 @@ class UserController extends Controller
     /*主页面*/
     public function home()
     {
-        $posts = Post::where('type','=','yanghu')->orWhere('type','=','jianjie')->get();
+        $posts = Post::where('type','=','yanghu')->orWhere('type','=','jianjie')->orderBy('created_at','desc')->paginate(10);
         return view('home',['posts' => $posts]);
     }
 
@@ -310,7 +311,7 @@ class UserController extends Controller
     /*多肉简介页面的内容*/
     public function jianjiepage()
     {
-        $posts = Post::where('type','=','jianjie')->get();
+        $posts = Post::where('type','=','jianjie')->orderBy('created_at','desc')->paginate(10);
 //        dd($posts);
         return view('user.jianjie',['posts' => $posts]);
     }
@@ -406,7 +407,7 @@ class UserController extends Controller
     /*种植养护页面的内容*/
     public function yanghupage()
     {
-        $posts = Post::where('type','=','yanghu')->get();
+        $posts = Post::where('type','=','yanghu')->orderBy('created_at','desc')->paginate(10);
 //        dd($posts);
         return view('user.yanghu',['posts' => $posts]);
     }
@@ -455,7 +456,7 @@ class UserController extends Controller
     /*种植日志页面的内容*/
     public function rizhipage()
     {
-        $posts = Post::where('type','=','rizhi')->get();
+        $posts = Post::where('type','=','rizhi')->orderBy('created_at','desc')->paginate(10);
 //        dd($posts);
         return view('user.rizhi',['posts' => $posts]);
     }

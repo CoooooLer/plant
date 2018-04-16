@@ -56,7 +56,16 @@
                                 <div style="text-align: right;margin: 10px 0;">
                                     <a  href="single?id={{ $post->id }}" target="_blank"><input type="button" class="btn btn-success" value="阅读全文"></a>
                                 </div>
-                                <div class="tips">多肉简介&nbsp;&nbsp;多肉小知识&nbsp;&nbsp;多肉养成</div>
+                                <div class="tips">
+                                    @if($post->type == 'jianjie')
+                                        <span class="glyphicon glyphicon-asterisk" style="font-size: 36px;top: 15px;"></span>多肉简介
+                                    @else
+                                        <span class="glyphicon glyphicon-asterisk" style="font-size: 36px;top: 15px;"></span>种植养护
+                                    @endif
+                                    &nbsp;&nbsp;&nbsp;&nbsp;
+                                    <span class="glyphicon glyphicon-euro" style="font-size: 20px"></span>多肉小知识&nbsp;&nbsp;&nbsp;&nbsp;
+                                    <span class="glyphicon glyphicon-heart"></span>多肉养成
+                                </div>
                             </div>
                         </div>
                     @endforeach
@@ -80,6 +89,14 @@
                 </div>
             </div>
         </div>
+        {{--分页--}}
+        <div class="container">
+            @foreach ($posts as $post)
+                {{ $post->name }}
+            @endforeach
+        </div>
+
+        {{ $posts->links() }}
     </div>
 
 

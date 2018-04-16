@@ -68,6 +68,15 @@
                 </div>
             </div>
         </div>
+
+        {{--分页--}}
+        <div class="container">
+            @foreach ($posts as $post)
+                {{ $post->name }}
+            @endforeach
+        </div>
+
+        {{ $posts->links() }}
     </div>
 
 
