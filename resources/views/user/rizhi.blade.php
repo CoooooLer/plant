@@ -46,11 +46,7 @@
                         <div class="yanghu-unit">
                             <h2><a href="">{{ $post->title }}</a></h2>
                         </div>
-                        <div class="yanghu-unit-content">
-                            <div class="yanghu-unit-right">
-                                <div class="right-content">{{ $post->content }}</div>
-                            </div>
-                        </div>
+                        <div class="" style="text-indent: 30px;">{{ $post->content }}</div>
                     @endforeach
                 </div>
 

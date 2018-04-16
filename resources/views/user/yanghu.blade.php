@@ -1,6 +1,6 @@
 @extends('layout.basic')
 
-@section('title','主页')
+@section('title','种植养护')
 
 @section('header')
     @parent

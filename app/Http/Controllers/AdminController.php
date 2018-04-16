@@ -15,7 +15,7 @@ use Symfony\Polyfill\Php70\Php70;
 
 class AdminController extends Controller
 {
-    /*z主要处理用户的信息*/
+    /*主要处理用户的信息*/
     private $validate = [
         'verifyCode'      =>  '/^[A-Za-z0-9]{4}$/u',                                    //4个字符的英文字符串
         'username'      =>  '/^[\x{4e00}-\x{9fa5}A-Za-z0-9_]{3,20}$/u',                //3-20位的中文、英文、数字、下划线
@@ -24,12 +24,14 @@ class AdminController extends Controller
         'phone'         =>  '/^1[34578]\d{9}$/u',                                   //电话号码匹配
     ];
 
+    /*管理员管理中心*/
     public function userList()
     {
         $users = User::all();
         return view('admin.userList',['users' => $users]);
     }
 
+    /*管理员删除用户*/
     public function deleteUser()
     {
         $uId = $_POST['uId'];
@@ -42,6 +44,7 @@ class AdminController extends Controller
         return '1';
     }
 
+    /*管理员编辑用户*/
     public function userEdit()
     {
         $uId = $_GET['uId'];
@@ -50,7 +53,7 @@ class AdminController extends Controller
 
     }
 
-//编辑用户信息后保存
+    //管理员编辑用户信息后保存
     public function editUserInfo()
     {
         $password = $_POST['password'];
@@ -95,7 +98,7 @@ class AdminController extends Controller
 
     }
 
-//创建用户
+    //管理员创建用户
     public function createUser()
     {
         $username = $_POST['username'];
@@ -152,16 +155,6 @@ class AdminController extends Controller
         }
 
     }
-
-
-
-
-
-
-
-
-
-
 
 
 }

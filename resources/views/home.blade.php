@@ -8,7 +8,6 @@
 
 @section('content')
     <div class="container" style="margin-top: 81px">
-
         <div class="content-box">
             <div class="content">
                 <div class="add-post">
@@ -22,9 +21,6 @@
                             <button type="submit" class="tijiao btn btn-success">发表文章</button>
                         </div>
 
-                        {{--<div class="msg-box">--}}
-
-                        {{--</div>--}}
                     </form>
                 </div>
                 {{--提示--}}

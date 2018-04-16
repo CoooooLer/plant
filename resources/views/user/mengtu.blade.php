@@ -1,6 +1,6 @@
 @extends('layout.basic')
 
-@section('title','多肉简介')
+@section('title','萌图欣赏')
 
 @section('header')
     @parent

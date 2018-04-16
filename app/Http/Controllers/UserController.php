@@ -31,9 +31,8 @@ class UserController extends Controller
         'phone'         =>  '/^1[34578]\d{9}$/u',                                   //电话号码匹配
     ];
 
-    /*
-     * 用户注册验证
-     * */
+
+//  用户注册验证
     public function register(Request $request)
     {
         $username = $_POST['username'];
@@ -109,10 +108,8 @@ class UserController extends Controller
 
     }
 
-    /*
-     * 用户登录验证
-     * */
-    /*用户登录*/
+
+    /*用户登录验证*/
     public function login(Request $request)
     {
         $username = $_POST['username'];
@@ -222,13 +219,13 @@ class UserController extends Controller
         return view('home',['posts' => $posts]);
     }
 
-    /*简介页面的发表帖子*/
+    /*多肉简介页面的发表帖子*/
     public function jianjie(Request $request)
     {
         $username = $_COOKIE['username'];
         $type = $request->type;
         $title = $request->title;
-        $content = $request->content;
+        $content = $_POST['content'];
         $img = $request->file('img');
         $imgName = null;
         $imgPath = null;
@@ -310,7 +307,7 @@ class UserController extends Controller
 
     }
 
-    /*简介页面的内容*/
+    /*多肉简介页面的内容*/
     public function jianjiepage()
     {
         $posts = Post::where('type','=','jianjie')->get();
@@ -318,13 +315,13 @@ class UserController extends Controller
         return view('user.jianjie',['posts' => $posts]);
     }
 
-    /*养护页面发表帖子*/
+    /*种植养护页面发表帖子*/
     public function yanghu(Request $request)
     {
         $username = $_COOKIE['username'];
         $type = $request->type;
         $title = $request->title;
-        $content = $request->content;
+        $content = $_POST['content'];
         $img = $request->file('img');
         $imgName = null;
         $imgPath = null;
@@ -406,7 +403,7 @@ class UserController extends Controller
 
     }
 
-    /*养护页面的内容*/
+    /*种植养护页面的内容*/
     public function yanghupage()
     {
         $posts = Post::where('type','=','yanghu')->get();
@@ -414,7 +411,7 @@ class UserController extends Controller
         return view('user.yanghu',['posts' => $posts]);
     }
 
-    /*萌图页面*/
+    /*萌图欣赏页面*/
     public function mengtu()
     {
         $posts = Post::where('type','=','yanghu')->orWhere('type','=','jianjie')->get();
@@ -427,7 +424,7 @@ class UserController extends Controller
         $username = $_COOKIE['username'];
         $type = $request->type;
         $title = $request->title;
-        $content = $request->content;
+        $content = $_POST['content'];
 //        dd($title,$img);
         if(!$title || !$content)
         {
