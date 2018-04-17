@@ -125,7 +125,7 @@
                                         </div>
                                         <div class="yanghu-unit-content">
                                             <div class="img">
-                                                <a href="single?id=${v.d}" target="_blank">
+                                                <a href="single?id=${v.id}" target="_blank">
                                                     <img src="${v.img_url}" alt="">
                                                 </a>
                                             </div>
@@ -134,10 +134,16 @@
                                                 <div style="text-align: right;margin: 10px 0;">
                                                     <a  href="single?id=${v.id}" target="_blank"><input type="button" class="btn btn-success" value="阅读全文"></a>
                                                 </div>
-                                                <div class="tips">多肉简介&nbsp;&nbsp;多肉小知识&nbsp;&nbsp;多肉养成</div>
+                                                <div class="tips">
+                                                        <span class="glyphicon glyphicon-asterisk" style="font-size: 36px;top: 15px;"></span>多肉简介
+                                                        &nbsp;&nbsp;&nbsp;&nbsp;
+                                                        <span class="glyphicon glyphicon-euro" style="font-size: 20px"></span>多肉小知识&nbsp;&nbsp;&nbsp;&nbsp;
+                                                        <span class="glyphicon glyphicon-heart"></span>多肉养成
+
+                                                    </div>
+                                                </div>
                                             </div>
-                                    </div>
-                                `
+`
                                         $('.yanghu-content').html($html);
                                     });
                                 }

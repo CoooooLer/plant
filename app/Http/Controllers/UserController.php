@@ -462,10 +462,13 @@ class UserController extends Controller
     }
 
     /*详情页*/
-    public function single()
+    public function single(Request $request)
     {
-        $id = $_GET['id'];
+//        $id = $_GET['id'];
+        $id = $request->id;
+//        dd($id);
         $post = Post::find($id);
+//        dd($post);
         return view('user.single',['post' => $post]);
     }
 
