@@ -47,6 +47,7 @@ class initPlant extends Command
     public function initDatabase()
     {
         $this->call('migrate');
+
     }
 
     /**

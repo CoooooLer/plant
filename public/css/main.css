@@ -578,6 +578,26 @@ a{
     transition: all ease 0.8s;
 
 }
+.add-post .title{
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    /*outline:none;*/
+    border-radius: 3px;
+    /*outline-color: #94b60e;*/
+    border:1px solid #94b60e;
+    outline-style: inherit;
+}
+.add-post textarea {
+    resize: none;
+    outline-color: #94b60e;
+    border: 1px solid #94b60e;
+    border-radius: 5px;
+    overflow-x: hidden;
+    overflow-y: auto;
+    outline-style: inherit;
+
+}
 .add-box{
     height: 36px;
     width: 36px;
