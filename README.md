@@ -8,7 +8,7 @@
 ```
 ### 3.创建上传图片目录
 ```
- artisan plant:init   
+  php artisan plant:init   
 ```
 ### 4.创建数据表
 ```
