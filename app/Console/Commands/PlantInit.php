@@ -5,7 +5,7 @@ namespace App\Console\Commands;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Storage;
 
-class initPlant extends Command
+class plantInit extends Command
 {
     /**
      * The name and signature of the console command.
