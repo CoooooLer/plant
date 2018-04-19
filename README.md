@@ -2,11 +2,16 @@
 
 添加 `.env` 文件
 
-### 2.安装依赖
+### 2.获取APP_KEY
+```
+ php artisan key:generate
+```
+
+### 3.安装依赖
 ```
   composer install
 ```
-### 3.初始化
+### 4.初始化
 ```
   php artisan plant:init   
 ```
