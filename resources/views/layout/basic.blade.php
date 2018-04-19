@@ -52,7 +52,7 @@
             </div>
         </div>
     @show
-<div class="content">
+<div class="content" style="overflow: hidden;">
     @section('content')
         @show
 </div>

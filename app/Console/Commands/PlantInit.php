@@ -2,6 +2,7 @@
 
 namespace App\Console\Commands;
 
+use App\model\User;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Storage;
 
@@ -40,8 +41,8 @@ class plantInit extends Command
     {
         $this->initDirectory();
         $this->call('migrate');
-        $this->call('db:seed');
-
+//        $this->call('db:seed');  //初始化管理员
+        $this->initAdmin();
     }
 
     /*
@@ -58,11 +59,12 @@ class plantInit extends Command
      */
     public function initAdmin()
     {
-        $password = $this->ask('What is the admin password?');
+        $password = $this->secret('请输入管理员密码');
+        $phone = $this->ask('请输入管理员联系电话');
         User::create([
             'username' => 'admin',
             'password' => bcrypt($password),
-            'email' => 'admin@admin.com',
+            'phone' => $phone,
         ]);
 
     }
