@@ -17,7 +17,6 @@ class admin extends Seeder
             'username' => 'admin',
             'password' =>  bcrypt('123456'),
             'phone' => '13436227331',
-            'money' => '999999',
             'created_at' => date('Y-m-d H:i:s'),
             'updated_at' => date('Y-m-d H:i:s'),
         ]);

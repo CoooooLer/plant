@@ -22,6 +22,7 @@ body{
     .header{
        display: flex;
         justify-content: flex-start;
+        overflow: hidden;
     }
     .header-content{
         /*width: 800px !important;*/
@@ -495,7 +496,7 @@ a{
 .container .content-box{
     display: flex;
     justify-content: space-between;
-    border:1px solid #ededed;
+    /*border:1px solid #ededed;*/
 }
 .container .content{
     width: 800px;
@@ -587,6 +588,7 @@ a{
     /*outline-color: #94b60e;*/
     border:1px solid #94b60e;
     outline-style: inherit;
+    text-indent: 20px;
 }
 .add-post textarea {
     resize: none;

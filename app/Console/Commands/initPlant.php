@@ -39,6 +39,9 @@ class initPlant extends Command
     public function handle()
     {
         $this->initDirectory();
+        $this->call('migrate');
+        $this->call('db:seed');
+
     }
 
     /*

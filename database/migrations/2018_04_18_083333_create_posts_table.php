@@ -19,9 +19,9 @@ class CreatePostsTable extends Migration
             $table->string('type',20);
             $table->string('title',55);
             $table->string('content',255);
-            $table->string('img_name',50);
-            $table->string('img_local_path',255);
-            $table->string('img_url',255);
+            $table->string('img_name',50)->nullable($value = true);
+            $table->string('img_local_path',255)->nullable();
+            $table->string('img_url',255)->nullable();
             $table->timestamps();
         });
     }
