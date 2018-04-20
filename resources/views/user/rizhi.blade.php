@@ -33,7 +33,9 @@
                 <div class="yanghu-title">
                     <div style="display: flex;justify-content: space-between">
                         <span class="fenlei-title">分类：种植日志</span>
-                        @if(Cookie::has('username'))
+                        @if(Cookie::get('username') === 'admin')
+
+                        @elseif(Cookie::has('username'))
                             <div class="add-box">
                                 <span class="glyphicon glyphicon-plus add-plus" ></span>
                             </div>

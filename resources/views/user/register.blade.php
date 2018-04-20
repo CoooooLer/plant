@@ -118,9 +118,21 @@
             });
 
             $('.btn-test').on('click',function () {
-                axios.post('/oauth/clients')
+//               axios.get('/oauth/clients')
+//                    .then(response => {
+//                        console.log(response.data);
+//                    });
+                const data = {
+                    name:'client-test',
+                    redirect:'localhost'
+                };
+
+                axios.post('oauth/clients',data)
                     .then(response => {
                         console.log(response.data);
+                    })
+                    .catch(response => {
+                        alert('error');
                     });
             });
 

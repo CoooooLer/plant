@@ -57,12 +57,7 @@
                     </div>
                     {{--提示框--}}
                     {{--@include('layout.message')--}}
-
                 </form>
-
-
-
-
             </div>
         </div>
     </div>

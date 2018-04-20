@@ -415,7 +415,7 @@ class UserController extends Controller
     /*萌图欣赏页面*/
     public function mengtu()
     {
-        $posts = Post::where('type','=','yanghu')->orWhere('type','=','jianjie')->get();
+        $posts = Post::where('type','=','yanghu')->orWhere('type','=','jianjie')->orderBy('created_at','desc')->get();
         return view('user.mengtu',['posts' => $posts]);
     }
 
