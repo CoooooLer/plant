@@ -62,6 +62,7 @@
                         <p class="errvalidate errall"></p>
                     </div>
                     <div class="form-group">
+                        <button type="button" class="btn btn-info btn-test">axios</button>
                         <button type="button" class="form-control btn btn-r">注册</button>
                     </div>
                         <div class="form-group reg">
@@ -82,10 +83,11 @@
 @section('footer')
     <script src="js/jquery.min.js"></script>
     <script src="js/canvas.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script>
         $(document).ready(function () {
+            $.ajaxSetup({headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')}});
             $('.btn-r').on('click',function () {
-                $.ajaxSetup({headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')}});
                 $.ajax({
                     url:'register',
                     type:'post',
@@ -114,6 +116,14 @@
                     }
                 });
             });
+
+            $('.btn-test').on('click',function () {
+                axios.post('/oauth/clients')
+                    .then(response => {
+                        console.log(response.data);
+                    });
+            });
+
         });
     </script>
 @endsection

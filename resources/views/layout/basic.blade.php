@@ -52,7 +52,7 @@
             </div>
         </div>
     @show
-<div class="content" style="overflow: hidden;">
+<div class="content">
     @section('content')
         @show
 </div>
@@ -67,6 +67,7 @@
         <script src="js/jquery.min.js"></script>
         {{--<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>--}}
         <script src="js/bootstrap.js"></script>
+        <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
         <script>
             $(document).ready(function () {
                 //顶部导航栏的切换

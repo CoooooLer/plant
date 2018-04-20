@@ -2,10 +2,13 @@
 
 namespace App\model;
 
+use Laravel\Passport\HasApiTokens;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Notifications\Notifiable;
 
 class User extends Model
 {
+    use HasApiTokens,Notifiable;
     /**
      * 规定表名、主键
      * 维护时间戳

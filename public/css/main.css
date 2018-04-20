@@ -22,7 +22,7 @@ body{
     .header{
        display: flex;
         justify-content: flex-start;
-        overflow: hidden;
+        /*overflow: hidden;*/
     }
     .header-content{
         /*width: 800px !important;*/
@@ -40,7 +40,7 @@ body{
     min-width: 1200px;
     background: #fff;
     border-bottom: 1px solid #d8d8d8;
-    overflow: hidden;
+    /*overflow: hidden;*/
 }
 .header-content{
     width: 1200px;
@@ -49,8 +49,9 @@ body{
     display: flex;
     justify-content: space-between;
     align-items: center;
-    overflow: hidden;
+    /*overflow: hidden;*/
 }
+
 .header-nav{
     position: relative;
     display: flex;
@@ -439,7 +440,7 @@ a{
     margin-left: 20px;
     border:1px solid #ededed;
     height: 450px;
-    overflow: hidden;
+    /*overflow: hidden;*/
 }
 .today-unit{
 
