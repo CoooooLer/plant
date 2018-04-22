@@ -33,13 +33,13 @@
                             <li class="dropdown ">
                                 <a href="#" class="" data-toggle="dropdown" role="button"  aria-expanded="true">&nbsp;&nbsp;{{ Cookie::get('username') }}&nbsp;&nbsp;<span class="caret"></span></a>
                                 <ul class="dropdown-menu">
-                                    <li><a href="personal"><span class="glyphicon glyphicon-user"></span>个人中心</a></li>
-                                    <li><a href="editPerson?username={{ Cookie::get('username') }}"><span class="glyphicon glyphicon-user"></span>修改资料</a></li>
+                                    <li><a href="personal"><span class="glyphicon glyphicon-home"></span>&nbsp;个人中心</a></li>
+                                    <li><a href="editPerson?username={{ Cookie::get('username') }}"><span class="glyphicon glyphicon-pencil"></span>&nbsp;修改资料</a></li>
 
                                     @if(  Cookie::get('username') === 'admin'  )
-                                        <li><a href="userList"><span class="glyphicon glyphicon-user"></span>管理中心</a></li>
+                                        <li><a href="userList"><span class="glyphicon glyphicon-user"></span>&nbsp;管理中心</a></li>
                                     @endif
-                                    <li><a href=" {{ Route('logOut') }} "><span class="glyphicon glyphicon-user"></span>退出登录</a></li>
+                                    <li><a href=" {{ Route('logOut') }} "><span class="glyphicon glyphicon-remove"></span>&nbsp;退出登录</a></li>
                                 </ul>
                             </li>
                         </ul>

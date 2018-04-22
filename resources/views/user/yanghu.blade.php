@@ -60,13 +60,13 @@
                                 </div>
                                 <div class="tips">
                                     @if($post->type == 'jianjie')
-                                        <span class="glyphicon glyphicon-asterisk" style="font-size: 36px;top: 15px;"></span>多肉简介
+                                        <span class="glyphicon glyphicon-asterisk icon-color"></span>多肉简介
                                     @else
-                                        <span class="glyphicon glyphicon-asterisk" style="font-size: 36px;top: 15px;"></span>种植养护
+                                        <span class="glyphicon glyphicon-tint icon-color"></span>种植养护
                                     @endif
                                     &nbsp;&nbsp;&nbsp;&nbsp;
-                                    <span class="glyphicon glyphicon-euro" style="font-size: 20px"></span>多肉小知识&nbsp;&nbsp;&nbsp;&nbsp;
-                                    <span class="glyphicon glyphicon-heart"></span>多肉养成
+                                    <span class="glyphicon glyphicon-euro icon-color"></span>多肉小知识&nbsp;&nbsp;&nbsp;&nbsp;
+                                    <span class="glyphicon glyphicon-heart icon-color"></span>多肉养成
                                 </div>
                             </div>
                         </div>
