@@ -8,7 +8,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <link rel="stylesheet" href="css/main.css">
     <link rel="stylesheet" href="css/bootstrap.min.css">
-
+    <link rel="shortcut icon" type="image/x-icon" href="img/logo-little.png" />
     <title>@yield('title')</title>
 </head>
 <body>
