@@ -10,6 +10,7 @@ namespace App\Http\Controllers;
 
 
 
+use App\model\Comment;
 use App\model\Post;
 use App\model\Screen;
 use App\model\Seat;
@@ -232,9 +233,14 @@ class UserController extends Controller
         $imgPath = null;
         $imgUrl = null;
 //        dd($title,$img);
-        if(!$title || !$content)
+        if(empty($title))
         {
-            $request->session()->flash('warning','标题、内容不能为空');
+            $request->session()->flash('warning','标题不能为空');
+            return redirect()->back();
+        }
+        if(empty($content))
+        {
+            $request->session()->flash('warning','内容不能为空');
             return redirect()->back();
         }
 
@@ -328,12 +334,16 @@ class UserController extends Controller
         $imgPath = null;
         $imgUrl = null;
 //        dd($title,$img);
-        if(!$title || !$content)
+        if(empty($title))
         {
-            $request->session()->flash('warning','标题、内容不能为空');
+            $request->session()->flash('warning','标题不能为空');
             return redirect()->back();
         }
-
+        if(empty($content))
+        {
+            $request->session()->flash('warning','内容不能为空');
+            return redirect()->back();
+        }
         if(empty($img))
         {
             $post = Post::create([
@@ -427,28 +437,31 @@ class UserController extends Controller
         $title = $request->title;
         $content = $_POST['content'];
 //        dd($title,$img);
-        if(!$title || !$content)
+        if(empty($title))
         {
-            $request->session()->flash('warning','标题、内容不能为空');
+            $request->session()->flash('warning','标题不能为空');
             return redirect()->back();
         }
-        else
+        if(empty($content))
         {
-            $post = Post::create([
-                'title' => $title,
-                'content' => $content,
-                'type' => $type,
-                'username' => $username,
-            ]);
-
-            if ($post) {
-                $request->session()->flash('success', '发表成功');
-                return redirect()->back();
-            } else {
-                $request->session()->flash('warning', '发表失败');
-                return redirect()->back();
-            }
+            $request->session()->flash('warning','内容不能为空');
+            return redirect()->back();
         }
+        $post = Post::create([
+            'title' => $title,
+            'content' => $content,
+            'type' => $type,
+            'username' => $username,
+        ]);
+
+        if ($post) {
+            $request->session()->flash('success', '发表成功');
+            return redirect()->back();
+        } else {
+            $request->session()->flash('warning', '发表失败');
+            return redirect()->back();
+        }
+
 
 
     }
@@ -468,8 +481,13 @@ class UserController extends Controller
         $id = $request->id;
 //        dd($id);
         $post = Post::find($id);
+        $comments = Comment::where('pId','=',$id)->orderBy('created_at','desc')->get();
 //        dd($post);
-        return view('user.single',['post' => $post]);
+        return view('user.single',[
+            'post' => $post,
+            'comments' => $comments,
+        ]);
+
     }
 
     /*个人中心*/
@@ -520,6 +538,52 @@ class UserController extends Controller
         else
         {
             return null;
+        }
+    }
+
+    /*留言*/
+    public function liuyan(Request $request)
+    {
+        $username = $_COOKIE['username'];
+        $pId = $_POST['pId'];
+        $content = $_POST['content'];
+//        dd($username,$pId,$content);
+        if(empty($content))
+        {
+           $request->session()->flash('warning','内容不能为空');
+           return redirect()->back();
+        }
+        else
+        {
+            $comment = Comment::create([
+                'pId' => $pId,
+                'username' => $username,
+                'content' => $content,
+            ]);
+            if($comment)
+            {
+                $request->session()->flash('success','留言成功');
+                return redirect()->back();
+            }
+        }
+    }
+
+    /*删除留言*/
+    public function dropComment(Request $request)
+    {
+        $id = $_GET['id'];
+        $comment = Comment::where('id','=',$id)->first();
+//        dd($id,$comment);
+        $bool = $comment->delete();
+        if($bool)
+        {
+            $request->session()->flash('success','删除成功');
+            return redirect()->back();
+        }
+        else
+        {
+            $request->session()->flash('warning','删除失败');
+            return redirect()->back();
         }
     }
 

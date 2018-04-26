@@ -9,7 +9,7 @@ use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvid
 
 class User extends Model
 {
-    use HasApiTokens,Notifiable;
+//    use HasApiTokens,Notifiable;
     /**
      * 规定表名、主键
      * 维护时间戳

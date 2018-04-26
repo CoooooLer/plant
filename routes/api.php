@@ -18,12 +18,12 @@ use Illuminate\Http\Request;
 });*/
 
 
-Route::post('login','api\PassportController@login');
-Route::post('register','api\PassportController@register');
-
-Route::group(['middleware' => 'auth:api'],function (){
-        Route::post('get-details','api\PassportController@getDatails');
-});
+//Route::post('login','api\PassportController@login');
+//Route::post('register','api\PassportController@register');
+//
+//Route::group(['middleware' => 'auth:api'],function (){
+//        Route::post('get-details','api\PassportController@getDatails');
+//});
 
 
 //Route::get('/', function () {

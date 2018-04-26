@@ -136,14 +136,13 @@
                                                     <a  href="single?id=${v.id}" target="_blank"><input type="button" class="btn btn-success" value="阅读全文"></a>
                                                 </div>
                                                 <div class="tips">
-                                                        <span class="glyphicon glyphicon-asterisk" style="font-size: 36px;top: 15px;"></span>多肉简介
-                                                        &nbsp;&nbsp;&nbsp;&nbsp;
-                                                        <span class="glyphicon glyphicon-euro" style="font-size: 20px"></span>多肉小知识&nbsp;&nbsp;&nbsp;&nbsp;
-                                                        <span class="glyphicon glyphicon-heart"></span>多肉养成
-
+                                                            <span class="glyphicon glyphicon-tint icon-color"></span>多肉养护
+                                                            &nbsp;&nbsp;&nbsp;&nbsp;
+                                                            <span class="glyphicon glyphicon-star icon-color"></span>多肉小知识&nbsp;&nbsp;&nbsp;&nbsp;
+                                                            <span class="glyphicon glyphicon-heart icon-color"></span>多肉养成
+                                                            </div>
+                                                        </div>
                                                     </div>
-                                                </div>
-                                            </div>
 `
                                         $('.yanghu-content').html($html);
                                     });

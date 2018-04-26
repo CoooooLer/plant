@@ -62,7 +62,7 @@
                         <p class="errvalidate errall"></p>
                     </div>
                     <div class="form-group">
-                        <button type="button" class="btn btn-info btn-test">axios</button>
+                        {{--<button type="button" class="btn btn-info btn-test">axios</button>--}}
                         <button type="button" class="form-control btn btn-r">注册</button>
                     </div>
                         <div class="form-group reg">

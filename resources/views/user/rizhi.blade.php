@@ -17,7 +17,7 @@
                         {{ csrf_field() }}
                         <input type="hidden" class="title" name="type" value="rizhi"><br>
                         标题:<input type="text" class="title" name="title"  placeholder="请输人日志标题" style="width: 550px"><br>
-                        内容:<br> <textarea name="content" id="" cols="" rows="2" style="width: 700px;height: 200px;" placeholder="请输入内容"> </textarea><br>
+                        内容:<br> <textarea name="content" id="" cols="" rows="2" style="width: 700px;height: 200px;" placeholder="请输入内容"></textarea><br>
                         {{--上传图片：<input type="file" class="file" name="img">--}}
                         <div style="text-align: right;">
                                 <button type="submit" class="tijiao btn btn-success">发表日志</button>

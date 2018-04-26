@@ -608,13 +608,14 @@ a{
     width: 36px;
     background: #ffffff;
     border-radius: 50%;
-    text-align: center;
     cursor: pointer;
+    display: flex;
+    justify-content: center;
 }
 .add-plus{
-    font-size: 50px;
+    font-size: 26px;
     color: #4cae4c;
-    line-height: 26px!important;
+    line-height: 34px!important;
 }
 .active{
     height: 400px;
@@ -656,7 +657,8 @@ a{
     margin:0 auto;
     border:1px solid #eeeeee;
     background: #F8F8F8;
-    height: 90vh;
+    padding-bottom: 50px;
+    /*height: 90vh;*/
 }
 .single-title{
     padding: 10px;
@@ -684,6 +686,41 @@ a{
     text-indent: 20px;
     padding: 20px;
     color: #776B5D;
+}
+.add-comment-box{
+
+}
+.add-comment{
+    text-align: center;
+}
+.add-comment textarea{
+    resize: none;
+    /*outline-color: #dedede;*/
+    border: 1px solid #776B5D;
+    border-radius: 5px;
+    overflow-x: hidden;
+    overflow-y: auto;
+    outline-style: inherit;
+    padding: 5px;
+}
+.add-btn-box{
+    text-align: right;
+    padding: 0 20px;
+}
+.comment-content-box{
+    border:1px solid #cccccc;
+    border-radius: 5px;
+    width: 700px;
+    margin: 15px auto;
+    padding: 10px;
+}
+.comment-info{
+    text-align: right;
+    color: #aaaaaa;
+}
+.paginate{
+    text-align: right;
+    padding: 5px 20px;
 }
 /*详情页面 end*/
 
