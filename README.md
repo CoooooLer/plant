@@ -1,6 +1,6 @@
 ### 1.配置文件
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;添加 `.env` 文件
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;添加 `.env` 文件
 
 ### 2.安装依赖
 ```
