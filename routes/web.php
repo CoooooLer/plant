@@ -22,7 +22,8 @@ Route::any('rizhipage','UserController@rizhipage')->name('rizhipage');          
 Route::any('mengtu','UserController@mengtu')->name('mengtu');                      /*萌图欣赏页面*/
 Route::any('single','UserController@single')->name('single');                      /*详情页面*/
 Route::any('liuyan','UserController@liuyan')->name('liuyan');                       /*留言*/
-Route::any('dropComment','UserController@dropComment')->name('dropComment');
+Route::any('dropComment','UserController@dropComment')->name('dropComment');        /*删除留言*/
+Route::any('reply','UserController@reply')->name('reply');                          /*回复留言*/
 /*用户相关*/
 Route::view('/reg','user.register');                                                /*用户注册页面*/
 Route::view('/log','user.login')->name('log');                                      /*用户登录页面*/

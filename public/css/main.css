@@ -710,7 +710,7 @@ a{
 .comment-content-box{
     border:1px solid #cccccc;
     border-radius: 5px;
-    width: 700px;
+    width: 90%;
     margin: 15px auto;
     padding: 10px;
 }
@@ -722,6 +722,41 @@ a{
     text-align: right;
     padding: 5px 20px;
 }
+.reply-box{
+    /*width:95%;*/
+    height: 0;
+    overflow: hidden;
+    transition: all ease .6s;
+}
+.reply-box textarea{
+    resize: none;
+    border: 1px solid #eeeeee;
+    border-radius: 5px;
+    overflow-x: hidden;
+    overflow-y: auto;
+    outline-style: inherit;
+    padding: 5px;
+    width:100%;
+}
+.addReply{
+    height: 100px;
+    padding: 5px 10px;
+    transition:  all ease .6s;
+}
+.reply-content-unit{
+    width: 100%;
+    padding: 5px 10px;
+    margin: 5px 0;
+    border-bottom: 1px #d7d7d7 dotted;
+}
+.reply-content-unit span:first-child{
+    color: #94b60e;
+}
+.reply-content-unit .create{
+    text-align: right;
+}
+
+
 /*详情页面 end*/
 
 /*admin  管理中心 start*/

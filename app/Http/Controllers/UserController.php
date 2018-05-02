@@ -12,10 +12,8 @@ namespace App\Http\Controllers;
 
 use App\model\Comment;
 use App\model\Post;
-use App\model\Screen;
-use App\model\Seat;
+use App\model\reply;
 use App\model\User;
-use App\model\Ticket;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
@@ -482,10 +480,12 @@ class UserController extends Controller
 //        dd($id);
         $post = Post::find($id);
         $comments = Comment::where('pId','=',$id)->orderBy('created_at','desc')->get();
-//        dd($post);
+        $replys = Reply::where('pId','=',$id)->orderBy('created_at','desc')->get();
+//        dd($replys);
         return view('user.single',[
             'post' => $post,
             'comments' => $comments,
+            'replys' => $replys,
         ]);
 
     }
@@ -573,6 +573,13 @@ class UserController extends Controller
     {
         $id = $_GET['id'];
         $comment = Comment::where('id','=',$id)->first();
+        $count = Reply::where('cId','=',$id)->count();
+        for($i=0;$i<$count;$i++)
+        {
+            $reply = Reply::where('cId','=',$id)->first();
+            $reply->delete();
+        }
+
 //        dd($id,$comment);
         $bool = $comment->delete();
         if($bool)
@@ -587,5 +594,38 @@ class UserController extends Controller
         }
     }
 
+    /*回复留言*/
+    public function reply(Request $request)
+    {
+        $username = $_COOKIE['username'];
+        $pId = $_POST['pId'];
+        $cId = $_POST['cId'];
+        $content = $_POST['content'];
+//        dd($username,$cId,$content);
+        if (empty($content))
+        {
+            $request->session()->flash('warning','回复内容不能为空');
+            return redirect()->back();
+        }
+        else
+        {
+            $reply = Reply::create([
+                'pId' => $pId,
+                'cId' => $cId,
+                'username' => $username,
+                'content' => $content,
+            ]);
+        }
+        if($reply)
+        {
+            $request->session()->flash('success','回复成功');
+            return redirect()->back();
+        }
+        else
+        {
+            $request->session()->flash('warning','回复失败');
+            return redirect()->back();
+        }
+    }
 
 }
