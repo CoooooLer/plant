@@ -480,7 +480,7 @@ class UserController extends Controller
 //        dd($id);
         $post = Post::find($id);
         $comments = Comment::where('pId','=',$id)->orderBy('created_at','desc')->get();
-        $replys = Reply::where('pId','=',$id)->orderBy('created_at','desc')->get();
+        $replys = Reply::where('pId','=',$id)->orderBy('created_at','asc')->get();
 //        dd($replys);
         return view('user.single',[
             'post' => $post,
@@ -600,6 +600,7 @@ class UserController extends Controller
         $username = $_COOKIE['username'];
         $pId = $_POST['pId'];
         $cId = $_POST['cId'];
+        $toUsername = $_POST['toUsername'];
         $content = $_POST['content'];
 //        dd($username,$cId,$content);
         if (empty($content))
@@ -613,6 +614,7 @@ class UserController extends Controller
                 'pId' => $pId,
                 'cId' => $cId,
                 'username' => $username,
+                'toUsername' => $toUsername,
                 'content' => $content,
             ]);
         }

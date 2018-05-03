@@ -668,6 +668,7 @@ a{
 }
 .single-info{
     padding: 0 10px;
+    text-align: right;
 }
 .single-info span{
     padding:5px 10px;
@@ -713,6 +714,8 @@ a{
     width: 90%;
     margin: 15px auto;
     padding: 10px;
+    -ms-word-break: break-all;
+    word-break: break-all;
 }
 .comment-info{
     text-align: right;
@@ -747,15 +750,21 @@ a{
     width: 100%;
     padding: 5px 10px;
     margin: 5px 0;
-    border-bottom: 1px #d7d7d7 dotted;
+    border-top: 1px #d7d7d7 dotted;
 }
 .reply-content-unit span:first-child{
     color: #94b60e;
 }
 .reply-content-unit .create{
     text-align: right;
+    /*width: 80%;*/
+    position: relative;
+    right: 7%;
+    top: 0;
 }
-
+.comment-content-box .username{
+    color: #94b60e;
+}
 
 /*详情页面 end*/
 

@@ -52,26 +52,37 @@
                     @if(Cookie::get('username') === $comment->username)
                         <a href="dropComment?id={{ $comment->id }}"><button class="btn btn-default btn-xs">删除</button></a>
                     @endif
-                    &nbsp;&nbsp;{{ $comment->created_at }} &nbsp;&nbsp; {{ $comment->username }}&nbsp;&nbsp;<button class="btn btn-default btn-xs btn-reply">回复</button>
+                    &nbsp;&nbsp;{{ $comment->created_at }} &nbsp;&nbsp; <span class="username">{{ $comment->username }}</span>&nbsp;&nbsp;<button class="btn btn-default btn-xs btn-reply">回复</button>
                     <form action="reply" method="post">
                         {{ csrf_field() }}
                         <div class="reply-box">
                             <input type="hidden" name="pId" value="{{ $post->id }}">
                             <input type="hidden" name="cId" value="{{ $comment->id }}">
+                            <input type="hidden" name="toUsername" value="{{ $comment->username }}">
                             <textarea name="content" id=""></textarea>
                             <div class="reply-fabiao">
-                                {{--<span>回复：{{ $comment->username }}</span>--}}
                                 <button type="submit" class="btn btn-default btn-xs">发表</button>
                             </div>
                         </div>
                     </form>
                 </div>
                 @foreach($replys as $reply)
-                    {{--<p>{{ $reply->cId }}&nbsp;{{ $comment->id }}</p>--}}
                     @if($reply->cId === $comment->id)
                         <div class="reply-content-unit">
-                            <span>{{ $reply->username }}:</span><span>{{ $reply->content }}</span>
-                            <div class="create">{{ $reply->created_at }}</div>
+                            <span class="username">{{ $reply->username }}</span>:@<span class="username">{{ $reply->toUsername }}</span></sp><div>{{ $reply->content }}</div>
+                            <div class="create">{{ $reply->created_at }}</div><button class="btn btn-default btn-xs btn-reply" style="text-align: right;position: relative;top: -20px;right: -95%;">回复</button>
+                            <form action="reply" method="post">
+                                {{ csrf_field() }}
+                                <div class="reply-box">
+                                    <input type="hidden" name="pId" value="{{ $post->id }}">
+                                    <input type="hidden" name="cId" value="{{ $comment->id }}">
+                                    <input type="hidden" name="toUsername" value="{{ $reply->username }}">
+                                    <textarea name="content" id=""></textarea>
+                                    <div class="reply-fabiao" style="text-align: right;">
+                                        <button type="submit" class="btn btn-default btn-xs">发表</button>
+                                    </div>
+                                </div>
+                            </form>
                         </div>
                     @endif
                 @endforeach
@@ -84,6 +95,8 @@
         $('.btn-reply').map(function (k,v) {
             $(this).on('click',function () {
 //                console.log($(this).next());
+                $username = $(this).parent().find('.username').text();
+                console.log($username);
                 $(this).parent().find('.reply-box').toggleClass('addReply');
             });
         });
