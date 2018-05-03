@@ -20,7 +20,7 @@ class plantInit extends Command
      *
      * @var string
      */
-    protected $description = 'init plant dir';
+    protected $description = 'init plant dir and table';
 
     /**
      * Create a new command instance.
@@ -40,7 +40,8 @@ class plantInit extends Command
     public function handle()
     {
         $this->initDirectory();
-        $this->call('migrate');
+//        $this->call('migrate');
+        $this->initDatabase();
 //        $this->call('db:seed');  //初始化管理员
         $this->initAdmin();
     }

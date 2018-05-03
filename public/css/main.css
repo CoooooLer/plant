@@ -601,7 +601,7 @@ a{
     overflow-x: hidden;
     overflow-y: auto;
     outline-style: inherit;
-
+    padding: 5px;
 }
 .add-box{
     height: 36px;
