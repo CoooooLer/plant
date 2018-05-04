@@ -5,6 +5,7 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="shortcut icon" type="image/x-icon" href="img/logo-little.png" />
     <link rel="stylesheet" href="css/main.css">
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <script src="js/jquery.min.js"></script>
@@ -53,12 +54,14 @@
                         <a href="dropComment?id={{ $comment->id }}"><button class="btn btn-default btn-xs">删除</button></a>
                     @endif
                     &nbsp;&nbsp;{{ $comment->created_at }} &nbsp;&nbsp; <span class="username">{{ $comment->username }}</span>&nbsp;&nbsp;<button class="btn btn-default btn-xs btn-reply">回复</button>
+                        <span class="counts"></span>
                     <form action="reply" method="post">
                         {{ csrf_field() }}
                         <div class="reply-box">
                             <input type="hidden" name="pId" value="{{ $post->id }}">
                             <input type="hidden" name="cId" value="{{ $comment->id }}">
                             <input type="hidden" name="toUsername" value="{{ $comment->username }}">
+                            <span>回复：{{ $comment->username }}</span>
                             <textarea name="content" id=""></textarea>
                             <div class="reply-fabiao">
                                 <button type="submit" class="btn btn-default btn-xs">发表</button>
@@ -66,10 +69,12 @@
                         </div>
                     </form>
                 </div>
+                <input type="hidden" value="{{ $i=0 }}" />
                 @foreach($replys as $reply)
                     @if($reply->cId === $comment->id)
+                        <input type="hidden" value="{{ ++$i }}" />
                         <div class="reply-content-unit">
-                            <span class="username">{{ $reply->username }}</span>:@<span class="username">{{ $reply->toUsername }}</span></sp><div>{{ $reply->content }}</div>
+                            <span class="username">{{ $reply->username }}</span>回复：<span class="username">{{ $reply->toUsername }}</span></sp><div>{{ $reply->content }}</div>
                             <div class="create">{{ $reply->created_at }}</div><button class="btn btn-default btn-xs btn-reply" style="text-align: right;position: relative;top: -20px;right: -95%;">回复</button>
                             <form action="reply" method="post">
                                 {{ csrf_field() }}
@@ -77,6 +82,7 @@
                                     <input type="hidden" name="pId" value="{{ $post->id }}">
                                     <input type="hidden" name="cId" value="{{ $comment->id }}">
                                     <input type="hidden" name="toUsername" value="{{ $reply->username }}">
+                                    <span>回复：{{ $reply->username }}</span>
                                     <textarea name="content" id=""></textarea>
                                     <div class="reply-fabiao" style="text-align: right;">
                                         <button type="submit" class="btn btn-default btn-xs">发表</button>
@@ -86,6 +92,7 @@
                         </div>
                     @endif
                 @endforeach
+                <input type="hidden" class="count" value="{{ $i }}" />
             </div>
         @endforeach
     </div>
@@ -100,6 +107,15 @@
                 $(this).parent().find('.reply-box').toggleClass('addReply');
             });
         });
+
+        $('.comment-content-box').map(function () {
+           $count = $(this).find('.count').val();
+           $count = $count ? $count : 0 ;
+            console.log($count);
+            $(this).find('.counts').html('('+$count+')');
+
+        });
+
     });
 </script>
 </html>

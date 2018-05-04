@@ -719,7 +719,6 @@ a{
 }
 .comment-info{
     text-align: right;
-    color: #aaaaaa;
 }
 .paginate{
     text-align: right;
@@ -730,6 +729,7 @@ a{
     height: 0;
     overflow: hidden;
     transition: all ease .6s;
+    text-align: left;
 }
 .reply-box textarea{
     resize: none;
@@ -742,7 +742,7 @@ a{
     width:100%;
 }
 .addReply{
-    height: 100px;
+    height: 110px;
     padding: 5px 10px;
     transition:  all ease .6s;
 }

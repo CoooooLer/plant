@@ -479,7 +479,7 @@ class UserController extends Controller
         $id = $request->id;
 //        dd($id);
         $post = Post::find($id);
-        $comments = Comment::where('pId','=',$id)->orderBy('created_at','desc')->get();
+        $comments = Comment::where('pId','=',$id)->orderBy('created_at','asc')->get();
         $replys = Reply::where('pId','=',$id)->orderBy('created_at','asc')->get();
 //        dd($replys);
         return view('user.single',[
